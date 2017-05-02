@@ -4494,7 +4494,7 @@ package RI2_fla
       
       public function rebirthation(e:MouseEvent) : *
       {
-         if(this.promi[3] >= Math.round(150 + this.reb_[1] * 25))
+         if(this.promi[3] >= Math.round(150 + this.reb_[1] * 10))
          {
             this.rebirth();
          }
@@ -4504,7 +4504,7 @@ package RI2_fla
       {
          if(this.keynow == 17)
          {
-            this.reb_[0] = this.reb_[0] + Math.floor(this.promi[3] * 0.04 + this.biger(0,this.promi[3] - this.maxmapa) * 0.16);
+            this.reb_[0] = this.reb_[0] + Math.floor(this.promi[3] * (1 / 15) + this.biger(0,this.promi[3] - this.maxmapa) * (2 / 15));
             this.maxmapa = this.promi[3];
             this.reb_[1] = this.reb_[1] + 1;
             this.stopall = 1;
@@ -5040,9 +5040,9 @@ package RI2_fla
          {
             this.atcir[this.i] = this.atkion(this.atklvls1[11 - this.i]) + this.logof(this.atklvls2[11 - this.i] + 2,1000) * (this.upgrades[this.i][2] / this.promi[3] - 1);
          }
-         this.rebwindowt.rebpts.text = "Rebirth Points: " + this.reb_[0] + " [+" + Math.floor(this.promi[3] * 0.05 + this.biger(0,this.promi[3] - this.maxmapa) * 0.15) + "]";
+         this.rebwindowt.rebpts.text = "Rebirth Points: " + this.reb_[0] + " [+" + Math.floor(this.promi[3] * (1 / 15) + this.biger(0,this.promi[3] - this.maxmapa) * (2 / 15)) + "]";
          this.rebwindowt.rebnum.text = "Rebirth #" + this.reb_[1] + " (x" + Math.round(10 + 5 * this.reb_[1]) / 10 + " speed)";
-         this.rebwindowt.mapaneed.text = "MAPA need to reb.: " + Math.round(150 + this.reb_[1] * 25) + "+";
+         this.rebwindowt.mapaneed.text = "MAPA need to reb.: " + Math.round(150 + this.reb_[1] * 10) + "+";
          this.rebwindowt.yomapa.text = "Your MAPA now: " + this.promi[3];
          this.rebwindowt.yomax.text = "Your Max MAPA before: " + this.maxmapa;
          if(this.autobuy[0] == 0)
