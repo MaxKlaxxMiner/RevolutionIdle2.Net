@@ -13,9 +13,11 @@ package RI2_fla
    import flash.net.SharedObject;
    import flash.net.URLRequest;
    import flash.system.Security;
+   import flash.system.System;
    import flash.text.TextField;
    import flash.ui.ContextMenu;
    import flash.utils.Timer;
+   import main.ageCrypt;
    
    public dynamic class MainTimeline extends MovieClip
    {
@@ -25,9 +27,19 @@ package RI2_fla
       
       public var amount:TextField;
       
+      public var bonus_mpl:TextField;
+      
       public var circus:MovieClip;
       
       public var cm:MovieClip;
+      
+      public var damteam:MovieClip;
+      
+      public var he:MovieClip;
+      
+      public var hplvl:TextField;
+      
+      public var levnum:TextField;
       
       public var m1:TextField;
       
@@ -75,6 +87,8 @@ package RI2_fla
       
       public var spdup:TextField;
       
+      public var ttf:TextField;
+      
       public var upmus:MovieClip;
       
       public var upopt:MovieClip;
@@ -118,6 +132,8 @@ package RI2_fla
       public var loader:Loader;
       
       public var kongregate;
+      
+      public var note:String;
       
       public var data1;
       
@@ -183,11 +199,89 @@ package RI2_fla
       
       public var kanal:SoundChannel;
       
+      public var datamassive:Array;
+      
+      public var i71;
+      
+      public var i72;
+      
+      public var i73;
+      
+      public var i74;
+      
+      public var i75;
+      
+      public var i76;
+      
+      public var i77;
+      
+      public var i78;
+      
+      public var i79;
+      
+      public var i80;
+      
+      public var i81;
+      
+      public var i82;
+      
+      public var i83;
+      
+      public var i84;
+      
+      public var datamassives:Array;
+      
+      public var atksunl;
+      
+      public var curst;
+      
+      public var hps:Array;
+      
+      public var i3;
+      
+      public var i4;
+      
+      public var maxmapa;
+      
+      public var reb_:Array;
+      
+      public var autobuy:Array;
+      
+      public var autoasc:Array;
+      
+      public var atklvls1:Array;
+      
+      public var atklvls2:Array;
+      
+      public var atkcosts1:Array;
+      
+      public var atkcosts2:Array;
+      
+      public var amtyp;
+      
+      public var ambs:Array;
+      
+      public var atcir:Array;
+      
       public var optis:Array;
+      
+      public var newopti;
+      
+      public var superbonus;
+      
+      public var curams;
+      
+      public var mccst2;
+      
+      public var newcost;
+      
+      public var v161;
       
       public var promwindowt;
       
       public var optwindowt;
+      
+      public var rebwindowt;
       
       public var menu:ContextMenu;
       
@@ -224,7 +318,6 @@ package RI2_fla
       
       public function qwe(e:TimerEvent) : *
       {
-         trace(this.fps);
          this.fpsx = this.fps;
          this.fps = 0;
       }
@@ -239,6 +332,14 @@ package RI2_fla
          var mccst:* = undefined;
          if(this.stopall == 0)
          {
+            if(this.atksunl == 1)
+            {
+               this.superbonus = this.pluss(0,this.logof(this.curst,1000) * (2.5 + this.curst / 75) - 2 / 3);
+            }
+            else
+            {
+               this.superbonus = 0;
+            }
             if(this.circles.length < 12)
             {
                this.logs1000m = [0.00706309968997936,0.0137975617194084,0.0202326134512039,0.0263937486825416,0.0323033376693521,0.0379811174356123,0.0434445894983354,0.0487093452260793,0.053789334078325,0.0586970863518938,0.0634438993900972,0.0680399942186416];
@@ -246,12 +347,12 @@ package RI2_fla
                this.multius.push(0);
                if(this.upgrades.length == 10)
                {
-                  this.upgrades.push([0,0.0025 * this.promi[1],this.promi[3],30 / 3,this.logs1000m[10],30 / 3,-(2 / 3) + this.promi[0]]);
+                  this.upgrades.push([0,0.0025 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],30 / 3,this.logs1000m[10],30 / 3,-(2 / 3) + this.promi[0]]);
                   this.ascensions.push(30 / 3 + this.logs1000m[10] * 140);
                }
                else if(this.upgrades.length == 11)
                {
-                  this.upgrades.push([0,0.001 * this.promi[1],this.promi[3],60 / 3,this.logs1000m[11],60 / 3,-(2 / 3) + this.promi[0]]);
+                  this.upgrades.push([0,0.001 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],60 / 3,this.logs1000m[11],60 / 3,-(2 / 3) + this.promi[0]]);
                   this.ascensions.push(60 / 3 + this.logs1000m[11] * 140);
                }
             }
@@ -439,6 +540,15 @@ package RI2_fla
          return Math.floor(this.pluss(this.money - (this.upgrades[f][3] + this.upgrades[f][0] * this.upgrades[f][4]) + this.minuss(this.upgrades[f][4],0),0) / this.upgrades[f][4]);
       }
       
+      public function set1ps(f:Number) : *
+      {
+         if(this.income[1] + this.logof(this.sum(this.upgrades),1000) - 2 / 3 < this.upgrades[f][3] + this.upgrades[f][0] * this.upgrades[f][4])
+         {
+            return 0;
+         }
+         return Math.floor(this.pluss(this.income[1] + this.logof(this.sum(this.upgrades),1000) - 2 / 3 - (this.upgrades[f][3] + this.upgrades[f][0] * this.upgrades[f][4]) + this.minuss(this.upgrades[f][4],0),0) / this.upgrades[f][4]);
+      }
+      
       public function set10ps(f:Number) : *
       {
          if(this.money - 1 / 3 < this.upgrades[f][3] + this.upgrades[f][0] * this.upgrades[f][4])
@@ -505,21 +615,25 @@ package RI2_fla
                      this.money = this.pluss(this.money,this.income[1] + this.logof(ami,1000));
                      this.allmoney = this.pluss(this.allmoney,this.income[1] + this.logof(ami,1000));
                      this.circles[this.i] = this.circles[this.i] - ami;
-                     this.multius[this.i] = this.pluss(this.multius[this.i],this.logof(ami,1000) + this.upgrades[this.i][6]);
+                     this.multius[this.i] = this.pluss(this.multius[this.i],this.logof(ami,1000) + this.upgrades[this.i][6] + this.superbonus);
+                     if(this.atksunl == 1)
+                     {
+                        this.dealdamage(this.i,ami);
+                     }
                   }
                }
             }
-            if(1 + Math.floor(this.allmoney / 6) / 100 < 1.2)
+            if(1 + Math.floor(this.allmoney / 3) / 100 < 1.4)
             {
                this.prestige[1] = 1 + Math.floor(this.allmoney / 3) / 100;
             }
-            else if(1 + Math.floor(this.allmoney / 6) / 100 < 2)
+            else if(1 + Math.floor(this.allmoney / 6) / 100 < 1.8)
             {
-               this.prestige[1] = 1 + Math.floor(this.allmoney / 6) / 100 + 0.1;
+               this.prestige[1] = 1 + Math.floor(this.allmoney / 6) / 100 + 0.2;
             }
             else
             {
-               this.prestige[1] = 1 + Math.floor(Math.sqrt(Math.sqrt(this.allmoney / 2400 + 0.75)) * 100) / 100;
+               this.prestige[1] = 1 + Math.floor(Math.sqrt(Math.sqrt(this.allmoney / 2400 + 0.8)) * 100) / 100;
             }
             if(this.biger(0,this.allmoney - 3) * this.logof(2.6,1000) < 100)
             {
@@ -791,13 +905,11 @@ package RI2_fla
                this.upprest.prest.xpar.text = "Power aft. pr.: " + Math.round(this.prestige[1] * 100) / 100;
                this.upprest.prest.pmnow.text = "Prest. Mult x" + this.short(this.prestige[2]);
                this.upprest.prest.pmar.text = "PM aft. pr. x" + this.short(this.prestige[3]);
-               trace(this.prestige);
             }
             else
             {
                this.upprest.prest.visible = false;
                this.prrem.visible = false;
-               trace(this.prestige);
             }
             this.overg.b1.visible = true;
             this.b1e();
@@ -2826,6 +2938,36 @@ package RI2_fla
          this.buych = 7;
       }
       
+      public function setn_1(e:MouseEvent) : *
+      {
+         this.amtyp = 1;
+      }
+      
+      public function setn_2(e:MouseEvent) : *
+      {
+         this.amtyp = 2;
+      }
+      
+      public function setn_3(e:MouseEvent) : *
+      {
+         this.amtyp = 3;
+      }
+      
+      public function setn_4(e:MouseEvent) : *
+      {
+         this.amtyp = 4;
+      }
+      
+      public function setn_5(e:MouseEvent) : *
+      {
+         this.amtyp = 5;
+      }
+      
+      public function setn_6(e:MouseEvent) : *
+      {
+         this.amtyp = 6;
+      }
+      
       public function over_b1(e:MouseEvent) : *
       {
          this.ammies.buy1.gotoAndStop(2);
@@ -2964,6 +3106,126 @@ package RI2_fla
       public function out_ball(e:MouseEvent) : *
       {
          this.ammies.buyall.gotoAndStop(1);
+      }
+      
+      public function over_rebb1(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buy1.gotoAndStop(2);
+      }
+      
+      public function up_rebb1(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buy1.gotoAndStop(2);
+      }
+      
+      public function down_rebb1(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buy1.gotoAndStop(1);
+      }
+      
+      public function out_rebb1(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buy1.gotoAndStop(1);
+      }
+      
+      public function over_rebb10(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buy10.gotoAndStop(2);
+      }
+      
+      public function up_rebb10(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buy10.gotoAndStop(2);
+      }
+      
+      public function down_rebb10(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buy10.gotoAndStop(1);
+      }
+      
+      public function out_rebb10(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buy10.gotoAndStop(1);
+      }
+      
+      public function over_rebb100(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buy100.gotoAndStop(2);
+      }
+      
+      public function up_rebb100(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buy100.gotoAndStop(2);
+      }
+      
+      public function down_rebb100(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buy100.gotoAndStop(1);
+      }
+      
+      public function out_rebb100(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buy100.gotoAndStop(1);
+      }
+      
+      public function over_rebb10ps(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buy10ps.gotoAndStop(2);
+      }
+      
+      public function up_rebb10ps(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buy10ps.gotoAndStop(2);
+      }
+      
+      public function down_rebb10ps(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buy10ps.gotoAndStop(1);
+      }
+      
+      public function out_rebb10ps(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buy10ps.gotoAndStop(1);
+      }
+      
+      public function over_rebb50ps(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buy50ps.gotoAndStop(2);
+      }
+      
+      public function up_rebb50ps(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buy50ps.gotoAndStop(2);
+      }
+      
+      public function down_rebb50ps(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buy50ps.gotoAndStop(1);
+      }
+      
+      public function out_rebb50ps(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buy50ps.gotoAndStop(1);
+      }
+      
+      public function over_rebbmax(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buymax.gotoAndStop(2);
+      }
+      
+      public function up_rebbmax(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buymax.gotoAndStop(2);
+      }
+      
+      public function down_rebbmax(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buymax.gotoAndStop(1);
+      }
+      
+      public function out_rebbmax(e:MouseEvent) : *
+      {
+         this.rebwindowt.ammies.buymax.gotoAndStop(1);
       }
       
       public function muti1(e:MouseEvent) : *
@@ -3325,12 +3587,12 @@ package RI2_fla
             this.stopall = 1;
             this.prestige[0] = this.prestige[1];
             this.prestige[2] = this.prestige[3];
-            this.logs1000m = [0.00706309968997936,0.0137975617194084,0.0202326134512039,0.0263937486825416,0.0323033376693521,0.0379811174356123,0.0434445894983354,0.0487093452260793,0.053789334078325,0.0586970863518938];
+            this.logs1000m = [0.00706309968997936,0.0137975617194084,0.0202326134512039,0.0263937486825416,0.0323033376693521,0.0379811174356123,0.0434445894983354,0.0487093452260793,0.053789334078325,0.0586970863518938,0.0634438993900972,0.0680399942186416];
             this.money = -2;
-            this.circles = [0,0,0,0,0,0,0,0,0,0];
-            this.multius = [0,0,0,0,0,0,0,0,0,0];
-            this.upgrades = [[5,0.06 * this.promi[1],this.promi[3],1 / 3.36,this.logs1000m[0],1 / 3.36,-(2 / 3) + this.promi[0]],[0,0.03 * this.promi[1],this.promi[3],2 / 3,this.logs1000m[1],2 / 3,-(2 / 3) + this.promi[0]],[0,0.02 * this.promi[1],this.promi[3],3 / 3,this.logs1000m[2],3 / 3,-(2 / 3) + this.promi[0]],[0,0.015 * this.promi[1],this.promi[3],4 / 3,this.logs1000m[3],4 / 3,-(2 / 3) + this.promi[0]],[0,0.012 * this.promi[1],this.promi[3],5 / 3,this.logs1000m[4],5 / 3,-(2 / 3) + this.promi[0]],[0,0.01 * this.promi[1],this.promi[3],6 / 3,this.logs1000m[5],6 / 3,-(2 / 3) + this.promi[0]],[0,0.0086 * this.promi[1],this.promi[3],9 / 3,this.logs1000m[6],9 / 3,-(2 / 3) + this.promi[0]],[0,0.0075 * this.promi[1],this.promi[3],12 / 3,this.logs1000m[7],12 / 3,-(2 / 3) + this.promi[0]],[0,0.00666666666666667 * this.promi[1],this.promi[3],15 / 3,this.logs1000m[8],15 / 3,-(2 / 3) + this.promi[0]],[0,0.005 * this.promi[1],this.promi[3],21 / 3,this.logs1000m[9],21 / 3,-(2 / 3) + this.promi[0]]];
-            this.ascensions = [1 / 3.36 + this.logs1000m[0] * 140,2 / 3 + this.logs1000m[1] * 140,3 / 3 + this.logs1000m[2] * 140,4 / 3 + this.logs1000m[3] * 140,5 / 3 + this.logs1000m[4] * 140,6 / 3 + this.logs1000m[5] * 140,9 / 3 + this.logs1000m[6] * 140,12 / 3 + this.logs1000m[7] * 140,15 / 3 + this.logs1000m[8] * 140,21 / 3 + this.logs1000m[9] * 140];
+            this.circles = [0,0,0,0,0,0,0,0,0,0,0,0];
+            this.multius = [0,0,0,0,0,0,0,0,0,0,0,0];
+            this.upgrades = [[5,0.06 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],1 / 3.36,this.logs1000m[0],1 / 3.36,-(2 / 3) + this.promi[0]],[0,0.03 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],2 / 3,this.logs1000m[1],2 / 3,-(2 / 3) + this.promi[0]],[0,0.02 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],3 / 3,this.logs1000m[2],3 / 3,-(2 / 3) + this.promi[0]],[0,0.015 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],4 / 3,this.logs1000m[3],4 / 3,-(2 / 3) + this.promi[0]],[0,0.012 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],5 / 3,this.logs1000m[4],5 / 3,-(2 / 3) + this.promi[0]],[0,0.01 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],6 / 3,this.logs1000m[5],6 / 3,-(2 / 3) + this.promi[0]],[0,0.0086 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],9 / 3,this.logs1000m[6],9 / 3,-(2 / 3) + this.promi[0]],[0,0.0075 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],12 / 3,this.logs1000m[7],12 / 3,-(2 / 3) + this.promi[0]],[0,0.00666666666666667 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],15 / 3,this.logs1000m[8],15 / 3,-(2 / 3) + this.promi[0]],[0,0.005 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],21 / 3,this.logs1000m[9],21 / 3,-(2 / 3) + this.promi[0]],[0,0.0025 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],30 / 3,this.logs1000m[10],30 / 3,-(2 / 3) + this.promi[0]],[0,0.001 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],60 / 3,this.logs1000m[11],60 / 3,-(2 / 3) + this.promi[0]]];
+            this.ascensions = [1 / 3.36 + this.logs1000m[0] * 140,2 / 3 + this.logs1000m[1] * 140,3 / 3 + this.logs1000m[2] * 140,4 / 3 + this.logs1000m[3] * 140,5 / 3 + this.logs1000m[4] * 140,6 / 3 + this.logs1000m[5] * 140,9 / 3 + this.logs1000m[6] * 140,12 / 3 + this.logs1000m[7] * 140,15 / 3 + this.logs1000m[8] * 140,21 / 3 + this.logs1000m[9] * 140,30 / 3 + this.logs1000m[10] * 140,60 / 3 + this.logs1000m[11] * 140];
             this.income = [0,0];
             this.stopall = 0;
          }
@@ -4021,6 +4283,21 @@ package RI2_fla
          this.mySharedObject.data.prused = this.prused;
          this.mySharedObject.data.optis = this.optis;
          this.mySharedObject.data.musicis = this.musicis;
+         this.mySharedObject.data.atksunl = this.atksunl;
+         this.mySharedObject.data.curst = this.curst;
+         this.mySharedObject.data.hps = this.hps;
+         this.mySharedObject.data.maxmapa = this.maxmapa;
+         this.mySharedObject.data.reb_ = this.reb_;
+         this.mySharedObject.data.autobuy = this.autobuy;
+         this.mySharedObject.data.autoasc = this.autoasc;
+         this.mySharedObject.data.atklvls1 = this.atklvls1;
+         this.mySharedObject.data.atklvls2 = this.atklvls2;
+         this.mySharedObject.data.atkcosts1 = this.atkcosts1;
+         this.mySharedObject.data.atkcosts2 = this.atkcosts2;
+         this.mySharedObject.data.amtyp = this.amtyp;
+         this.mySharedObject.data.ambs = this.ambs;
+         this.mySharedObject.data.newopti = this.newopti;
+         this.mySharedObject.data.v161 = this.v161;
          if(this.cheater == 0)
          {
             this.kongregate.stats.submit("log1000 allmoney",Math.floor(this.allmoney));
@@ -4028,6 +4305,11 @@ package RI2_fla
             this.kongregate.stats.submit("power*100",Math.round(this.prestige[0] * 100));
             this.kongregate.stats.submit("MAPA",Math.round(this.promi[3]));
             this.kongregate.stats.submit("Max Revs/Sec",Math.floor(this.sum(this.upgrades)));
+            this.kongregate.stats.submit("Rebirth",Math.round(this.reb_[1]));
+            if(this.atksunl == 1)
+            {
+               this.kongregate.stats.submit("Level",Math.round(this.curst));
+            }
          }
          this.mySharedObject.flush();
       }
@@ -4080,10 +4362,10 @@ package RI2_fla
             this.logs1000m = [0.00706309968997936,0.0137975617194084,0.0202326134512039,0.0263937486825416,0.0323033376693521,0.0379811174356123,0.0434445894983354,0.0487093452260793,0.053789334078325,0.0586970863518938,0.0634438993900972,0.0680399942186416];
             this.money = -2;
             this.allmoney = -2;
-            this.circles = [0,0,0,0,0,0,0,0,0,0];
-            this.multius = [0,0,0,0,0,0,0,0,0,0];
-            this.upgrades = [[5,0.06 * this.promi[1],this.promi[3],1 / 3.36,this.logs1000m[0],1 / 3.36,-(2 / 3) + this.promi[0]],[0,0.03 * this.promi[1],this.promi[3],2 / 3,this.logs1000m[1],2 / 3,-(2 / 3) + this.promi[0]],[0,0.02 * this.promi[1],this.promi[3],3 / 3,this.logs1000m[2],3 / 3,-(2 / 3) + this.promi[0]],[0,0.015 * this.promi[1],this.promi[3],4 / 3,this.logs1000m[3],4 / 3,-(2 / 3) + this.promi[0]],[0,0.012 * this.promi[1],this.promi[3],5 / 3,this.logs1000m[4],5 / 3,-(2 / 3) + this.promi[0]],[0,0.01 * this.promi[1],this.promi[3],6 / 3,this.logs1000m[5],6 / 3,-(2 / 3) + this.promi[0]],[0,0.0086 * this.promi[1],this.promi[3],9 / 3,this.logs1000m[6],9 / 3,-(2 / 3) + this.promi[0]],[0,0.0075 * this.promi[1],this.promi[3],12 / 3,this.logs1000m[7],12 / 3,-(2 / 3) + this.promi[0]],[0,0.00666666666666667 * this.promi[1],this.promi[3],15 / 3,this.logs1000m[8],15 / 3,-(2 / 3) + this.promi[0]],[0,0.005 * this.promi[1],this.promi[3],21 / 3,this.logs1000m[9],21 / 3,-(2 / 3) + this.promi[0]]];
-            this.ascensions = [1 / 3.36 + this.logs1000m[0] * 140,2 / 3 + this.logs1000m[1] * 140,3 / 3 + this.logs1000m[2] * 140,4 / 3 + this.logs1000m[3] * 140,5 / 3 + this.logs1000m[4] * 140,6 / 3 + this.logs1000m[5] * 140,9 / 3 + this.logs1000m[6] * 140,12 / 3 + this.logs1000m[7] * 140,15 / 3 + this.logs1000m[8] * 140,21 / 3 + this.logs1000m[9] * 140];
+            this.circles = [0,0,0,0,0,0,0,0,0,0,0,0];
+            this.multius = [0,0,0,0,0,0,0,0,0,0,0,0];
+            this.upgrades = [[5,0.06 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],1 / 3.36,this.logs1000m[0],1 / 3.36,-(2 / 3) + this.promi[0]],[0,0.03 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],2 / 3,this.logs1000m[1],2 / 3,-(2 / 3) + this.promi[0]],[0,0.02 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],3 / 3,this.logs1000m[2],3 / 3,-(2 / 3) + this.promi[0]],[0,0.015 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],4 / 3,this.logs1000m[3],4 / 3,-(2 / 3) + this.promi[0]],[0,0.012 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],5 / 3,this.logs1000m[4],5 / 3,-(2 / 3) + this.promi[0]],[0,0.01 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],6 / 3,this.logs1000m[5],6 / 3,-(2 / 3) + this.promi[0]],[0,0.0086 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],9 / 3,this.logs1000m[6],9 / 3,-(2 / 3) + this.promi[0]],[0,0.0075 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],12 / 3,this.logs1000m[7],12 / 3,-(2 / 3) + this.promi[0]],[0,0.00666666666666667 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],15 / 3,this.logs1000m[8],15 / 3,-(2 / 3) + this.promi[0]],[0,0.005 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],21 / 3,this.logs1000m[9],21 / 3,-(2 / 3) + this.promi[0]],[0,0.0025 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],30 / 3,this.logs1000m[10],30 / 3,-(2 / 3) + this.promi[0]],[0,0.001 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],60 / 3,this.logs1000m[11],60 / 3,-(2 / 3) + this.promi[0]]];
+            this.ascensions = [1 / 3.36 + this.logs1000m[0] * 140,2 / 3 + this.logs1000m[1] * 140,3 / 3 + this.logs1000m[2] * 140,4 / 3 + this.logs1000m[3] * 140,5 / 3 + this.logs1000m[4] * 140,6 / 3 + this.logs1000m[5] * 140,9 / 3 + this.logs1000m[6] * 140,12 / 3 + this.logs1000m[7] * 140,15 / 3 + this.logs1000m[8] * 140,21 / 3 + this.logs1000m[9] * 140,30 / 3 + this.logs1000m[10] * 140,60 / 3 + this.logs1000m[11] * 140];
             this.income = [0,0];
             this.stopall = 0;
             addChild(this.promwindowt);
@@ -4116,8 +4398,8 @@ package RI2_fla
          {
             this.npromi[0] = 2 / 3 + Math.sqrt((this.biger(this.prestige[2],this.prused[0]) - 2) * (1 / 16)) + 18;
          }
-         this.npromi[1] = 1 + this.biger(this.prestige[2],this.prused[1]) / 4;
-         this.npromi[2] = (this.biger(this.prestige[2],this.prused[2]) - 2) * (1 / 36);
+         this.npromi[1] = 1 + this.biger(this.prestige[2],this.prused[1]) / 3;
+         this.npromi[2] = (this.biger(this.prestige[2],this.prused[2]) - 2) * (1 / 24);
          this.npromi[3] = Math.round(100 + this.biger(this.prestige[2],this.prused[3]) * 10);
          if(this.prused[0] >= 2)
          {
@@ -4132,11 +4414,11 @@ package RI2_fla
          }
          if(this.prused[1] >= 2)
          {
-            this.promi[1] = 1 + this.prused[1] / 4;
+            this.promi[1] = 1 + this.prused[1] / 3;
          }
          if(this.prused[2] >= 2)
          {
-            this.promi[2] = (this.prused[2] - 2) * (1 / 36);
+            this.promi[2] = (this.prused[2] - 2) * (1 / 24);
          }
          if(this.prused[3] >= 2)
          {
@@ -4208,6 +4490,38 @@ package RI2_fla
       {
          this.promwindowt.promdes.p1.gotoAndStop(1);
          this.prst(1);
+      }
+      
+      public function rebirthation(e:MouseEvent) : *
+      {
+         if(this.promi[3] >= Math.round(150 + this.reb_[1] * 25))
+         {
+            this.rebirth();
+         }
+      }
+      
+      public function rebirth() : *
+      {
+         if(this.keynow == 17)
+         {
+            this.reb_[0] = this.reb_[0] + Math.floor(this.promi[3] * 0.04 + this.biger(0,this.promi[3] - this.maxmapa) * 0.16);
+            this.maxmapa = this.promi[3];
+            this.reb_[1] = this.reb_[1] + 1;
+            this.stopall = 1;
+            this.promi = [0,1,0,100];
+            this.maxpr = [1,1,0,0];
+            this.prused = [0,0,0,0];
+            this.prestige = [1,1,0,0];
+            this.logs1000m = [0.00706309968997936,0.0137975617194084,0.0202326134512039,0.0263937486825416,0.0323033376693521,0.0379811174356123,0.0434445894983354,0.0487093452260793,0.053789334078325,0.0586970863518938,0.0634438993900972,0.0680399942186416];
+            this.money = -2;
+            this.allmoney = -2;
+            this.circles = [0,0,0,0,0,0,0,0,0,0,0,0];
+            this.multius = [0,0,0,0,0,0,0,0,0,0,0,0];
+            this.upgrades = [[5,0.06 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],1 / 3.36,this.logs1000m[0],1 / 3.36,-(2 / 3) + this.promi[0]],[0,0.03 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],2 / 3,this.logs1000m[1],2 / 3,-(2 / 3) + this.promi[0]],[0,0.02 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],3 / 3,this.logs1000m[2],3 / 3,-(2 / 3) + this.promi[0]],[0,0.015 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],4 / 3,this.logs1000m[3],4 / 3,-(2 / 3) + this.promi[0]],[0,0.012 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],5 / 3,this.logs1000m[4],5 / 3,-(2 / 3) + this.promi[0]],[0,0.01 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],6 / 3,this.logs1000m[5],6 / 3,-(2 / 3) + this.promi[0]],[0,0.0086 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],9 / 3,this.logs1000m[6],9 / 3,-(2 / 3) + this.promi[0]],[0,0.0075 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],12 / 3,this.logs1000m[7],12 / 3,-(2 / 3) + this.promi[0]],[0,0.00666666666666667 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],15 / 3,this.logs1000m[8],15 / 3,-(2 / 3) + this.promi[0]],[0,0.005 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],21 / 3,this.logs1000m[9],21 / 3,-(2 / 3) + this.promi[0]],[0,0.0025 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],30 / 3,this.logs1000m[10],30 / 3,-(2 / 3) + this.promi[0]],[0,0.001 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],60 / 3,this.logs1000m[11],60 / 3,-(2 / 3) + this.promi[0]]];
+            this.ascensions = [1 / 3.36 + this.logs1000m[0] * 140,2 / 3 + this.logs1000m[1] * 140,3 / 3 + this.logs1000m[2] * 140,4 / 3 + this.logs1000m[3] * 140,5 / 3 + this.logs1000m[4] * 140,6 / 3 + this.logs1000m[5] * 140,9 / 3 + this.logs1000m[6] * 140,12 / 3 + this.logs1000m[7] * 140,15 / 3 + this.logs1000m[8] * 140,21 / 3 + this.logs1000m[9] * 140,30 / 3 + this.logs1000m[10] * 140,60 / 3 + this.logs1000m[11] * 140];
+            this.income = [0,0];
+            this.stopall = 0;
+         }
       }
       
       public function prom2_1(e:MouseEvent) : *
@@ -4342,6 +4656,14 @@ package RI2_fla
          }
       }
       
+      public function goright5(e:MouseEvent) : *
+      {
+         if(this.newopti < 1)
+         {
+            this.newopti = this.newopti + 1;
+         }
+      }
+      
       public function goleft1(e:MouseEvent) : *
       {
          if(this.optis[0] > 1)
@@ -4372,6 +4694,14 @@ package RI2_fla
          {
             this.optis[3] = this.optis[3] - 1;
             this.changeoptus();
+         }
+      }
+      
+      public function goleft5(e:MouseEvent) : *
+      {
+         if(this.newopti > 0)
+         {
+            this.newopti = this.newopti - 1;
          }
       }
       
@@ -4423,6 +4753,14 @@ package RI2_fla
          {
             this.optwindowt.opti4.text = "Graphics: Very Bumpy";
          }
+         if(this.newopti == 1)
+         {
+            this.optwindowt.opti5.text = "Show Hints: Yes";
+         }
+         else if(this.newopti == 0)
+         {
+            this.optwindowt.opti5.text = "Show Hints: No";
+         }
          if(stage.quality != "low" && this.optis[0] == 1)
          {
             stage.quality = "low";
@@ -4450,6 +4788,12 @@ package RI2_fla
          this.circus.gotoAndStop(this.optis[3]);
          this.ammies.gotoAndStop(this.optis[3]);
          this.sdes.gotoAndStop(this.optis[3]);
+         this.damteam.gotoAndStop(this.optis[3]);
+         this.rebwindowt.ammies.gotoAndStop(this.optis[3]);
+         this.rebwindowt.whites.gotoAndStop(this.optis[3]);
+         this.rebwindowt.others.gotoAndStop(this.optis[3]);
+         this.rebwindowt.sym.gotoAndStop(this.optis[3]);
+         this.he.gotoAndStop(this.optis[3]);
       }
       
       public function opopt(e:MouseEvent) : *
@@ -4457,11 +4801,1779 @@ package RI2_fla
          addChild(this.optwindowt);
          this.optwindowt.x = 525;
          this.optwindowt.y = 335;
+         this.optwindowt.inputt.text = "";
       }
       
       public function clopt(e:MouseEvent) : *
       {
          removeChild(this.optwindowt);
+         this.optwindowt.inputt.text = "";
+      }
+      
+      public function newsmth(e:Event) : *
+      {
+         if(this.atksunl == 1)
+         {
+            this.damteam.sqrh.visible = true;
+            this.levnum.visible = true;
+            this.hplvl.visible = true;
+            this.damteam.underhp.visible = true;
+            this.damteam.hpover.visible = true;
+            this.bonus_mpl.visible = true;
+            this.damteam.rebibut.visible = true;
+            this.levnum.text = "" + this.curst;
+            if(this.hps[0] >= 1)
+            {
+               this.hplvl.text = this.short(this.hps[0]) + " HP / " + this.short(this.hps[1]) + " HP";
+            }
+            else if(this.hps[0] < 1 && this.hps[1] >= 1)
+            {
+               this.hplvl.text = Math.round(Math.pow(1000,this.hps[0])) + " HP / " + this.short(this.hps[1]) + " HP";
+            }
+            else if(this.hps[0] < 1 && this.hps[1] < 1)
+            {
+               this.hplvl.text = Math.round(Math.pow(1000,this.hps[0])) + " HP / " + Math.round(Math.pow(1000,this.hps[1])) + " HP";
+            }
+            this.damteam.hpover.gotoAndStop(Math.round(Math.pow(1000,this.hps[0] - this.hps[1] + this.logof(200,1000))));
+            if(this.logof(this.curst,1000) * (3 + this.curst / 100) - 2 / 3 >= 1 / 3)
+            {
+               this.bonus_mpl.text = "x" + this.short(this.pluss(0,this.logof(this.curst,1000) * (2.5 + this.curst / 75) - 2 / 3)) + " to Basic MPL";
+            }
+            else
+            {
+               this.bonus_mpl.text = "x" + Math.round((1 + Math.pow(this.curst,2.5 + this.curst / 75) / 100) * 100) / 100 + " to Basic MPL";
+            }
+         }
+         else
+         {
+            this.damteam.sqrh.visible = false;
+            this.levnum.visible = false;
+            this.hplvl.visible = false;
+            this.damteam.underhp.visible = false;
+            this.damteam.hpover.visible = false;
+            this.bonus_mpl.visible = false;
+            if(this.reb_[0] < 1 && this.promi[3] < 150)
+            {
+               this.damteam.rebibut.visible = false;
+            }
+            else
+            {
+               this.damteam.rebibut.visible = true;
+            }
+         }
+         for(this.i = 0; this.i < 12; this.i++)
+         {
+            this.atkcosts1[this.i] = this.i + this.atklvls1[this.i];
+            this.atkcosts2[this.i] = 5 + this.i + this.atklvls2[this.i];
+         }
+         if(this.atksunl == 0)
+         {
+            this.rebwindowt.atlc1ss.visible = true;
+            this.rebwindowt.whites.b_batl.visible = true;
+            this.rebwindowt.ifunlbattles.text = "Unlock Battles:";
+            this.rebwindowt.atl1.visible = false;
+            this.rebwindowt.atas1.visible = false;
+            this.rebwindowt.whites.aab1.visible = false;
+            this.rebwindowt.whites.abb1.visible = false;
+            this.rebwindowt.atlc1.visible = false;
+            this.rebwindowt.atasc1.visible = false;
+            this.rebwindowt.atl2.visible = false;
+            this.rebwindowt.atas2.visible = false;
+            this.rebwindowt.whites.aab2.visible = false;
+            this.rebwindowt.whites.abb2.visible = false;
+            this.rebwindowt.atlc2.visible = false;
+            this.rebwindowt.atasc2.visible = false;
+            this.rebwindowt.atl3.visible = false;
+            this.rebwindowt.atas3.visible = false;
+            this.rebwindowt.whites.aab3.visible = false;
+            this.rebwindowt.whites.abb3.visible = false;
+            this.rebwindowt.atlc3.visible = false;
+            this.rebwindowt.atasc3.visible = false;
+            this.rebwindowt.atl4.visible = false;
+            this.rebwindowt.atas4.visible = false;
+            this.rebwindowt.whites.aab4.visible = false;
+            this.rebwindowt.whites.abb4.visible = false;
+            this.rebwindowt.atlc4.visible = false;
+            this.rebwindowt.atasc4.visible = false;
+            this.rebwindowt.atl5.visible = false;
+            this.rebwindowt.atas5.visible = false;
+            this.rebwindowt.whites.aab5.visible = false;
+            this.rebwindowt.whites.abb5.visible = false;
+            this.rebwindowt.atlc5.visible = false;
+            this.rebwindowt.atasc5.visible = false;
+            this.rebwindowt.atl6.visible = false;
+            this.rebwindowt.atas6.visible = false;
+            this.rebwindowt.whites.aab6.visible = false;
+            this.rebwindowt.whites.abb6.visible = false;
+            this.rebwindowt.atlc6.visible = false;
+            this.rebwindowt.atasc6.visible = false;
+            this.rebwindowt.atl7.visible = false;
+            this.rebwindowt.atas7.visible = false;
+            this.rebwindowt.whites.aab7.visible = false;
+            this.rebwindowt.whites.abb7.visible = false;
+            this.rebwindowt.atlc7.visible = false;
+            this.rebwindowt.atasc7.visible = false;
+            this.rebwindowt.atl8.visible = false;
+            this.rebwindowt.atas8.visible = false;
+            this.rebwindowt.whites.aab8.visible = false;
+            this.rebwindowt.whites.abb8.visible = false;
+            this.rebwindowt.atlc8.visible = false;
+            this.rebwindowt.atasc8.visible = false;
+            this.rebwindowt.atl9.visible = false;
+            this.rebwindowt.atas9.visible = false;
+            this.rebwindowt.whites.aab9.visible = false;
+            this.rebwindowt.whites.abb9.visible = false;
+            this.rebwindowt.atlc9.visible = false;
+            this.rebwindowt.atasc9.visible = false;
+            this.rebwindowt.atl10.visible = false;
+            this.rebwindowt.atas10.visible = false;
+            this.rebwindowt.whites.aab10.visible = false;
+            this.rebwindowt.whites.abb10.visible = false;
+            this.rebwindowt.atlc10.visible = false;
+            this.rebwindowt.atasc10.visible = false;
+            this.rebwindowt.atl11.visible = false;
+            this.rebwindowt.atas11.visible = false;
+            this.rebwindowt.whites.aab11.visible = false;
+            this.rebwindowt.whites.abb11.visible = false;
+            this.rebwindowt.atlc11.visible = false;
+            this.rebwindowt.atasc11.visible = false;
+            this.rebwindowt.atl12.visible = false;
+            this.rebwindowt.atas12.visible = false;
+            this.rebwindowt.whites.aab12.visible = false;
+            this.rebwindowt.whites.abb12.visible = false;
+            this.rebwindowt.atlc12.visible = false;
+            this.rebwindowt.atasc12.visible = false;
+            this.rebwindowt.sym.visible = false;
+         }
+         else
+         {
+            this.rebwindowt.atlc1ss.visible = false;
+            this.rebwindowt.whites.b_batl.visible = false;
+            this.rebwindowt.ifunlbattles.text = "Battles Unlocked";
+            this.rebwindowt.atl1.visible = true;
+            this.rebwindowt.atas1.visible = true;
+            this.rebwindowt.whites.aab1.visible = true;
+            this.rebwindowt.whites.abb1.visible = true;
+            this.rebwindowt.atlc1.visible = true;
+            this.rebwindowt.atasc1.visible = true;
+            this.rebwindowt.atl2.visible = true;
+            this.rebwindowt.atas2.visible = true;
+            this.rebwindowt.whites.aab2.visible = true;
+            this.rebwindowt.whites.abb2.visible = true;
+            this.rebwindowt.atlc2.visible = true;
+            this.rebwindowt.atasc2.visible = true;
+            this.rebwindowt.atl3.visible = true;
+            this.rebwindowt.atas3.visible = true;
+            this.rebwindowt.whites.aab3.visible = true;
+            this.rebwindowt.whites.abb3.visible = true;
+            this.rebwindowt.atlc3.visible = true;
+            this.rebwindowt.atasc3.visible = true;
+            this.rebwindowt.atl4.visible = true;
+            this.rebwindowt.atas4.visible = true;
+            this.rebwindowt.whites.aab4.visible = true;
+            this.rebwindowt.whites.abb4.visible = true;
+            this.rebwindowt.atlc4.visible = true;
+            this.rebwindowt.atasc4.visible = true;
+            this.rebwindowt.atl5.visible = true;
+            this.rebwindowt.atas5.visible = true;
+            this.rebwindowt.whites.aab5.visible = true;
+            this.rebwindowt.whites.abb5.visible = true;
+            this.rebwindowt.atlc5.visible = true;
+            this.rebwindowt.atasc5.visible = true;
+            this.rebwindowt.atl6.visible = true;
+            this.rebwindowt.atas6.visible = true;
+            this.rebwindowt.whites.aab6.visible = true;
+            this.rebwindowt.whites.abb6.visible = true;
+            this.rebwindowt.atlc6.visible = true;
+            this.rebwindowt.atasc6.visible = true;
+            this.rebwindowt.atl7.visible = true;
+            this.rebwindowt.atas7.visible = true;
+            this.rebwindowt.whites.aab7.visible = true;
+            this.rebwindowt.whites.abb7.visible = true;
+            this.rebwindowt.atlc7.visible = true;
+            this.rebwindowt.atasc7.visible = true;
+            this.rebwindowt.atl8.visible = true;
+            this.rebwindowt.atas8.visible = true;
+            this.rebwindowt.whites.aab8.visible = true;
+            this.rebwindowt.whites.abb8.visible = true;
+            this.rebwindowt.atlc8.visible = true;
+            this.rebwindowt.atasc8.visible = true;
+            this.rebwindowt.atl9.visible = true;
+            this.rebwindowt.atas9.visible = true;
+            this.rebwindowt.whites.aab9.visible = true;
+            this.rebwindowt.whites.abb9.visible = true;
+            this.rebwindowt.atlc9.visible = true;
+            this.rebwindowt.atasc9.visible = true;
+            this.rebwindowt.atl10.visible = true;
+            this.rebwindowt.atas10.visible = true;
+            this.rebwindowt.whites.aab10.visible = true;
+            this.rebwindowt.whites.abb10.visible = true;
+            this.rebwindowt.atlc10.visible = true;
+            this.rebwindowt.atasc10.visible = true;
+            this.rebwindowt.atl11.visible = true;
+            this.rebwindowt.atas11.visible = true;
+            this.rebwindowt.whites.aab11.visible = true;
+            this.rebwindowt.whites.abb11.visible = true;
+            this.rebwindowt.atlc11.visible = true;
+            this.rebwindowt.atasc11.visible = true;
+            this.rebwindowt.atl12.visible = true;
+            this.rebwindowt.atas12.visible = true;
+            this.rebwindowt.whites.aab12.visible = true;
+            this.rebwindowt.whites.abb12.visible = true;
+            this.rebwindowt.atlc12.visible = true;
+            this.rebwindowt.atasc12.visible = true;
+            this.rebwindowt.sym.visible = true;
+         }
+         this.set_super1(this.rebwindowt.atl1,this.rebwindowt.atas1,this.rebwindowt.atlc1,this.rebwindowt.atasc1,0);
+         this.set_super1(this.rebwindowt.atl2,this.rebwindowt.atas2,this.rebwindowt.atlc2,this.rebwindowt.atasc2,1);
+         this.set_super1(this.rebwindowt.atl3,this.rebwindowt.atas3,this.rebwindowt.atlc3,this.rebwindowt.atasc3,2);
+         this.set_super1(this.rebwindowt.atl4,this.rebwindowt.atas4,this.rebwindowt.atlc4,this.rebwindowt.atasc4,3);
+         this.set_super1(this.rebwindowt.atl5,this.rebwindowt.atas5,this.rebwindowt.atlc5,this.rebwindowt.atasc5,4);
+         this.set_super1(this.rebwindowt.atl6,this.rebwindowt.atas6,this.rebwindowt.atlc6,this.rebwindowt.atasc6,5);
+         this.set_super1(this.rebwindowt.atl7,this.rebwindowt.atas7,this.rebwindowt.atlc7,this.rebwindowt.atasc7,6);
+         this.set_super1(this.rebwindowt.atl8,this.rebwindowt.atas8,this.rebwindowt.atlc8,this.rebwindowt.atasc8,7);
+         this.set_super1(this.rebwindowt.atl9,this.rebwindowt.atas9,this.rebwindowt.atlc9,this.rebwindowt.atasc9,8);
+         this.set_super1(this.rebwindowt.atl10,this.rebwindowt.atas10,this.rebwindowt.atlc10,this.rebwindowt.atasc10,9);
+         this.set_super1(this.rebwindowt.atl11,this.rebwindowt.atas11,this.rebwindowt.atlc11,this.rebwindowt.atasc11,10);
+         this.set_super1(this.rebwindowt.atl12,this.rebwindowt.atas12,this.rebwindowt.atlc12,this.rebwindowt.atasc12,11);
+         for(this.i = 0; this.i < 12; this.i++)
+         {
+            this.atcir[this.i] = this.atkion(this.atklvls1[11 - this.i]) + this.logof(this.atklvls2[11 - this.i] + 2,1000) * (this.upgrades[this.i][2] / this.promi[3] - 1);
+         }
+         this.rebwindowt.rebpts.text = "Rebirth Points: " + this.reb_[0] + " [+" + Math.floor(this.promi[3] * 0.05 + this.biger(0,this.promi[3] - this.maxmapa) * 0.15) + "]";
+         this.rebwindowt.rebnum.text = "Rebirth #" + this.reb_[1] + " (x" + Math.round(10 + 5 * this.reb_[1]) / 10 + " speed)";
+         this.rebwindowt.mapaneed.text = "MAPA need to reb.: " + Math.round(150 + this.reb_[1] * 25) + "+";
+         this.rebwindowt.yomapa.text = "Your MAPA now: " + this.promi[3];
+         this.rebwindowt.yomax.text = "Your Max MAPA before: " + this.maxmapa;
+         if(this.autobuy[0] == 0)
+         {
+            this.rebwindowt.ab_cost.visible = true;
+            this.rebwindowt.whites.b_ab.visible = true;
+            this.rebwindowt.others.is_ab.visible = false;
+         }
+         else
+         {
+            this.rebwindowt.ab_cost.visible = false;
+            this.rebwindowt.whites.b_ab.visible = false;
+            this.rebwindowt.others.is_ab.visible = true;
+            this.rebwindowt.others.is_ab.gotoAndStop(this.autobuy[1] + 1);
+         }
+         if(this.autoasc[0] == 0)
+         {
+            this.rebwindowt.aas_cost.visible = true;
+            this.rebwindowt.whites.b_aas.visible = true;
+            this.rebwindowt.others.is_aas.visible = false;
+         }
+         else
+         {
+            this.rebwindowt.aas_cost.visible = false;
+            this.rebwindowt.whites.b_aas.visible = false;
+            this.rebwindowt.others.is_aas.visible = true;
+            this.rebwindowt.others.is_aas.gotoAndStop(this.autoasc[1] + 1);
+         }
+         if(this.amtyp == 1)
+         {
+            this.rebwindowt.ammies.buy1.u.gotoAndStop(2);
+            this.rebwindowt.ammies.buy10.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buy100.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buy10ps.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buy50ps.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buymax.u.gotoAndStop(1);
+            for(this.i = 0; this.i < 12; this.i++)
+            {
+               this.ambs[0][this.i] = 1;
+            }
+            for(this.i = 0; this.i < 12; this.i++)
+            {
+               this.ambs[1][this.i] = 1;
+            }
+         }
+         else if(this.amtyp == 2)
+         {
+            this.rebwindowt.ammies.buy1.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buy10.u.gotoAndStop(2);
+            this.rebwindowt.ammies.buy100.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buy10ps.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buy50ps.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buymax.u.gotoAndStop(1);
+            for(this.i = 0; this.i < 12; this.i++)
+            {
+               this.ambs[0][this.i] = 10;
+            }
+            for(this.i = 0; this.i < 12; this.i++)
+            {
+               this.ambs[1][this.i] = 10;
+            }
+         }
+         else if(this.amtyp == 3)
+         {
+            this.rebwindowt.ammies.buy1.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buy10.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buy100.u.gotoAndStop(2);
+            this.rebwindowt.ammies.buy10ps.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buy50ps.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buymax.u.gotoAndStop(1);
+            for(this.i = 0; this.i < 12; this.i++)
+            {
+               this.ambs[0][this.i] = 100;
+            }
+            for(this.i = 0; this.i < 12; this.i++)
+            {
+               this.ambs[1][this.i] = 100;
+            }
+         }
+         else if(this.amtyp == 4)
+         {
+            this.rebwindowt.ammies.buy1.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buy10.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buy100.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buy10ps.u.gotoAndStop(2);
+            this.rebwindowt.ammies.buy50ps.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buymax.u.gotoAndStop(1);
+            for(this.i = 0; this.i < 12; this.i++)
+            {
+               this.ambs[0][this.i] = this.findmaxAPN(Math.ceil(this.reb_[0] / 10),this.atkcosts1[this.i]);
+            }
+            for(this.i = 0; this.i < 12; this.i++)
+            {
+               this.ambs[1][this.i] = this.findmaxAPN(Math.ceil(this.reb_[0] / 10),this.atkcosts2[this.i]);
+            }
+         }
+         else if(this.amtyp == 5)
+         {
+            this.rebwindowt.ammies.buy1.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buy10.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buy100.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buy10ps.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buy50ps.u.gotoAndStop(2);
+            this.rebwindowt.ammies.buymax.u.gotoAndStop(1);
+            for(this.i = 0; this.i < 12; this.i++)
+            {
+               this.ambs[0][this.i] = this.findmaxAPN(Math.ceil(this.reb_[0] / 2),this.atkcosts1[this.i]);
+            }
+            for(this.i = 0; this.i < 12; this.i++)
+            {
+               this.ambs[1][this.i] = this.findmaxAPN(Math.ceil(this.reb_[0] / 2),this.atkcosts2[this.i]);
+            }
+         }
+         else if(this.amtyp == 6)
+         {
+            this.rebwindowt.ammies.buy1.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buy10.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buy100.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buy10ps.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buy50ps.u.gotoAndStop(1);
+            this.rebwindowt.ammies.buymax.u.gotoAndStop(2);
+            for(this.i = 0; this.i < 12; this.i++)
+            {
+               this.ambs[0][this.i] = this.findmaxAPN(this.reb_[0],this.atkcosts1[this.i]);
+            }
+            for(this.i = 0; this.i < 12; this.i++)
+            {
+               this.ambs[1][this.i] = this.findmaxAPN(this.reb_[0],this.atkcosts2[this.i]);
+            }
+         }
+      }
+      
+      public function adrb(e:MouseEvent) : *
+      {
+         addChild(this.rebwindowt);
+         this.rebwindowt.x = 533;
+         this.rebwindowt.y = 388;
+      }
+      
+      public function buy_bon_1_1(e:MouseEvent) : *
+      {
+         this.buying1t(0);
+      }
+      
+      public function buy_bon_1_2(e:MouseEvent) : *
+      {
+         this.buying1t(1);
+      }
+      
+      public function buy_bon_1_3(e:MouseEvent) : *
+      {
+         this.buying1t(2);
+      }
+      
+      public function buy_bon_1_4(e:MouseEvent) : *
+      {
+         this.buying1t(3);
+      }
+      
+      public function buy_bon_1_5(e:MouseEvent) : *
+      {
+         this.buying1t(4);
+      }
+      
+      public function buy_bon_1_6(e:MouseEvent) : *
+      {
+         this.buying1t(5);
+      }
+      
+      public function buy_bon_1_7(e:MouseEvent) : *
+      {
+         this.buying1t(6);
+      }
+      
+      public function buy_bon_1_8(e:MouseEvent) : *
+      {
+         this.buying1t(7);
+      }
+      
+      public function buy_bon_1_9(e:MouseEvent) : *
+      {
+         this.buying1t(8);
+      }
+      
+      public function buy_bon_1_10(e:MouseEvent) : *
+      {
+         this.buying1t(9);
+      }
+      
+      public function buy_bon_1_11(e:MouseEvent) : *
+      {
+         this.buying1t(10);
+      }
+      
+      public function buy_bon_1_12(e:MouseEvent) : *
+      {
+         this.buying1t(11);
+      }
+      
+      public function buy_bon_2_1(e:MouseEvent) : *
+      {
+         this.buying2t(0);
+      }
+      
+      public function buy_bon_2_2(e:MouseEvent) : *
+      {
+         this.buying2t(1);
+      }
+      
+      public function buy_bon_2_3(e:MouseEvent) : *
+      {
+         this.buying2t(2);
+      }
+      
+      public function buy_bon_2_4(e:MouseEvent) : *
+      {
+         this.buying2t(3);
+      }
+      
+      public function buy_bon_2_5(e:MouseEvent) : *
+      {
+         this.buying2t(4);
+      }
+      
+      public function buy_bon_2_6(e:MouseEvent) : *
+      {
+         this.buying2t(5);
+      }
+      
+      public function buy_bon_2_7(e:MouseEvent) : *
+      {
+         this.buying2t(6);
+      }
+      
+      public function buy_bon_2_8(e:MouseEvent) : *
+      {
+         this.buying2t(7);
+      }
+      
+      public function buy_bon_2_9(e:MouseEvent) : *
+      {
+         this.buying2t(8);
+      }
+      
+      public function buy_bon_2_10(e:MouseEvent) : *
+      {
+         this.buying2t(9);
+      }
+      
+      public function buy_bon_2_11(e:MouseEvent) : *
+      {
+         this.buying2t(10);
+      }
+      
+      public function buy_bon_2_12(e:MouseEvent) : *
+      {
+         this.buying2t(11);
+      }
+      
+      public function buying1t(n:Number) : *
+      {
+         if(this.reb_[0] >= this.biger(this.sumpr(this.atkcosts1[n],this.ambs[0][n]),this.atkcosts1[n]))
+         {
+            this.reb_[0] = this.reb_[0] - this.biger(this.sumpr(this.atkcosts1[n],this.ambs[0][n]),this.atkcosts1[n]);
+            this.atklvls1[n] = this.atklvls1[n] + this.ambs[0][n];
+         }
+      }
+      
+      public function buying2t(n:Number) : *
+      {
+         if(this.reb_[0] >= this.biger(this.sumpr(this.atkcosts2[n],this.ambs[1][n]),this.atkcosts2[n]))
+         {
+            this.reb_[0] = this.reb_[0] - this.biger(this.sumpr(this.atkcosts2[n],this.ambs[1][n]),this.atkcosts2[n]);
+            this.atklvls2[n] = this.atklvls2[n] + this.ambs[1][n];
+         }
+      }
+      
+      public function buy_abuy(e:MouseEvent) : *
+      {
+         if(this.reb_[0] >= 15)
+         {
+            this.reb_[0] = this.reb_[0] - 15;
+            this.autobuy[0] = 1;
+         }
+      }
+      
+      public function buy_aasc(e:MouseEvent) : *
+      {
+         if(this.reb_[0] >= 10)
+         {
+            this.reb_[0] = this.reb_[0] - 10;
+            this.autoasc[0] = 1;
+         }
+      }
+      
+      public function actABuy(e:MouseEvent) : *
+      {
+         if(this.autobuy[1] == 0)
+         {
+            this.autobuy[1] = 1;
+         }
+         else
+         {
+            this.autobuy[1] = 0;
+         }
+      }
+      
+      public function actAAS(e:MouseEvent) : *
+      {
+         if(this.autoasc[1] == 0)
+         {
+            this.autoasc[1] = 1;
+         }
+         else
+         {
+            this.autoasc[1] = 0;
+         }
+      }
+      
+      public function buybat(e:MouseEvent) : *
+      {
+         if(this.reb_[0] >= 5 && this.atksunl == 0)
+         {
+            this.reb_[0] = this.reb_[0] - 5;
+            this.atksunl = 1;
+         }
+      }
+      
+      public function closrb(e:MouseEvent) : *
+      {
+         removeChild(this.rebwindowt);
+      }
+      
+      public function set_super1(a:Object, b:Object, c:Object, d:Object, n:Number) : *
+      {
+         if(this.atklvls1[n] > 0)
+         {
+            a.text = "- Atk/Lap: " + this.atkio(this.atklvls1[n]) + " (" + this.atkio2(this.ambs[0][n] + 1) + ")";
+         }
+         else
+         {
+            a.text = "- Atk/Lap: NO";
+         }
+         if(this.atklvls1[n] > 0)
+         {
+            b.text = "- Atk Mult./Asc: x" + (2 + this.atklvls2[n]) + " (+x" + this.ambs[1][n] + ")";
+         }
+         else
+         {
+            b.text = "- Atk Mult./Asc: NO";
+         }
+         c.text = "Cost: " + this.biger(this.sumpr(this.atkcosts1[n],this.ambs[0][n]),this.atkcosts1[n]) + " RP";
+         d.text = "Cost: " + this.biger(this.sumpr(this.atkcosts2[n],this.ambs[1][n]),this.atkcosts2[n]) + " RP";
+      }
+      
+      public function atkio(a:Number) : *
+      {
+         if(a == 0)
+         {
+            return "NO";
+         }
+         return "" + this.short(this.logof(2,1000) * (a - 1));
+      }
+      
+      public function atkion(a:Number) : *
+      {
+         if(a == 0)
+         {
+            return -1;
+         }
+         return this.logof(2,1000) * (a - 1);
+      }
+      
+      public function atkio2(a:Number) : *
+      {
+         if(a == 0)
+         {
+            return "x1";
+         }
+         return "x" + this.short(this.logof(2,1000) * (a - 1));
+      }
+      
+      public function findmaxAPN(a:Number, b:Number) : *
+      {
+         var maxo:* = 0;
+         while(a >= b)
+         {
+            a = a - b;
+            b = b + 1;
+            maxo = maxo + 1;
+         }
+         return maxo;
+      }
+      
+      public function sumpr(a:Number, N:Number) : *
+      {
+         return (2 * a + (N - 1)) / 2 * N;
+      }
+      
+      public function dealdamage(a:Number, b:Number) : *
+      {
+         var estdmg:* = undefined;
+         if(this.atklvls1[11 - a] >= 1)
+         {
+            if(this.hps[0] > this.atcir[a] + this.logof(b,1000))
+            {
+               this.hps[0] = this.minuss(this.hps[0],this.atcir[a] + this.logof(b,1000));
+               if(this.hps[0] < this.logof(0.5,1000))
+               {
+                  this.curst = this.curst + 1;
+                  this.hps[1] = this.hps[1] + (this.logof(1.25 + 0.05 * this.curst,1000) - this.logof(this.curst - 1,1000) * 2 + this.logof(this.curst,1000) * 2);
+                  this.hps[0] = this.hps[1];
+               }
+            }
+            else if(this.hps[0] == this.atcir[a] + this.logof(b,1000))
+            {
+               this.curst = this.curst + 1;
+               this.hps[1] = this.hps[1] + (this.logof(1.25 + 0.05 * this.curst,1000) - this.logof(this.curst - 1,1000) * 2 + this.logof(this.curst,1000) * 2);
+               this.hps[0] = this.hps[1];
+            }
+            else if(this.hps[0] < this.atcir[a] + this.logof(b,1000))
+            {
+               estdmg = 0;
+               estdmg = this.minuss(this.atcir[a] + this.logof(b,1000),this.hps[0]);
+               this.curst = this.curst + 1;
+               this.hps[1] = this.hps[1] + (this.logof(1.25 + 0.05 * this.curst,1000) - this.logof(this.curst - 1,1000) * 2 + this.logof(this.curst,1000) * 2);
+               this.hps[0] = this.hps[1];
+               this.dealdamnum(estdmg);
+            }
+         }
+      }
+      
+      public function dealdamnum(est:Number) : *
+      {
+         var estdmg1:* = undefined;
+         if(this.hps[0] > est)
+         {
+            this.hps[0] = this.minuss(this.hps[0],est);
+            if(this.hps[0] < this.logof(0.5,1000))
+            {
+               this.curst = this.curst + 1;
+               this.hps[1] = this.hps[1] + (this.logof(1.25 + 0.05 * this.curst,1000) - this.logof(this.curst - 1,1000) * 2 + this.logof(this.curst,1000) * 2);
+               this.hps[0] = this.hps[1];
+            }
+         }
+         else if(this.hps[0] == est)
+         {
+            this.curst = this.curst + 1;
+            this.hps[1] = this.hps[1] + (this.logof(1.25 + 0.05 * this.curst,1000) - this.logof(this.curst - 1,1000) * 2 + this.logof(this.curst,1000) * 2);
+            this.hps[0] = this.hps[1];
+         }
+         else if(this.hps[0] < est)
+         {
+            estdmg1 = 0;
+            estdmg1 = this.minuss(est,this.hps[0]);
+            this.curst = this.curst + 1;
+            this.hps[1] = this.hps[1] + (this.logof(1.25 + 0.05 * this.curst,1000) - this.logof(this.curst - 1,1000) * 2 + this.logof(this.curst,1000) * 2);
+            this.hps[0] = this.hps[1];
+            this.dealdamnum(estdmg1);
+         }
+      }
+      
+      public function otherss(e:Event) : *
+      {
+         if(this.autobuy[1] == 1)
+         {
+            for(this.i3 = 0; this.i3 < 12; this.i3++)
+            {
+               this.curams = this.lower(this.upgrades[this.i3][2] - this.upgrades[this.i3][0],this.set1ps(this.i3));
+               this.mccst2 = this.upgrades[this.i3][3] + this.upgrades[this.i3][0] * this.upgrades[this.i3][4];
+               this.newcost = this.minuss(this.mccst2 + this.biger(1,this.curams) * this.upgrades[this.i3][4],this.mccst2) - this.minuss(this.upgrades[this.i3][4],0);
+               if(this.income[1] + this.logof(this.sum(this.upgrades),1000) - 2 / 3 >= this.newcost && this.upgrades[this.i3][0] < this.upgrades[this.i3][2])
+               {
+                  this.money = this.minuss(this.money,this.newcost);
+                  this.upgrades[this.i3][0] = this.upgrades[this.i3][0] + this.curams;
+               }
+            }
+         }
+         if(this.autoasc[1] == 1)
+         {
+            for(this.i4 = 0; this.i4 < 12; this.i4++)
+            {
+               if(this.income[1] + this.logof(this.sum(this.upgrades),1000) - 2 / 3 >= this.ascensions[this.i4] && this.upgrades[this.i4][0] >= this.upgrades[this.i4][2])
+               {
+                  this.setascend(this.i4);
+               }
+            }
+         }
+         if(this.newopti == 1)
+         {
+            if(this.overg.b1.hitTestPoint(mouseX,mouseY))
+            {
+               this.he.visible = true;
+               this.he.x = 284.9;
+               this.he.y = 54.55;
+               this.setforx(0);
+            }
+            else if(this.overg.b2.hitTestPoint(mouseX,mouseY) && this.upgrades[0][0] > 0)
+            {
+               this.he.visible = true;
+               this.he.x = 284.9;
+               this.he.y = 114.35;
+               this.setforx(1);
+            }
+            else if(this.overg.b3.hitTestPoint(mouseX,mouseY) && this.upgrades[1][0] > 0)
+            {
+               this.he.visible = true;
+               this.he.x = 284.9;
+               this.he.y = 174.15;
+               this.setforx(2);
+            }
+            else if(this.overg.b4.hitTestPoint(mouseX,mouseY) && this.upgrades[2][0] > 0)
+            {
+               this.he.visible = true;
+               this.he.x = 284.9;
+               this.he.y = 233.95;
+               this.setforx(3);
+            }
+            else if(this.overg.b5.hitTestPoint(mouseX,mouseY) && this.upgrades[3][0] > 0)
+            {
+               this.he.visible = true;
+               this.he.x = 284.9;
+               this.he.y = 293.75;
+               this.setforx(4);
+            }
+            else if(this.overg.b6.hitTestPoint(mouseX,mouseY) && this.upgrades[4][0] > 0)
+            {
+               this.he.visible = true;
+               this.he.x = 284.9;
+               this.he.y = 353.55;
+               this.setforx(5);
+            }
+            else if(this.overg.b7.hitTestPoint(mouseX,mouseY) && this.upgrades[5][0] > 0)
+            {
+               this.he.visible = true;
+               this.he.x = 284.9;
+               this.he.y = 413.35;
+               this.setforx(6);
+            }
+            else if(this.overg.b8.hitTestPoint(mouseX,mouseY) && this.upgrades[6][0] > 0)
+            {
+               this.he.visible = true;
+               this.he.x = 284.9;
+               this.he.y = 473.15;
+               this.setforx(7);
+            }
+            else if(this.overg.b9.hitTestPoint(mouseX,mouseY) && this.upgrades[7][0] > 0)
+            {
+               this.he.visible = true;
+               this.he.x = 284.9;
+               this.he.y = 532.95;
+               this.setforx(8);
+            }
+            else if(this.overg.b10.hitTestPoint(mouseX,mouseY) && this.upgrades[8][0] > 0)
+            {
+               this.he.visible = true;
+               this.he.x = 284.9;
+               this.he.y = 592.75;
+               this.setforx(9);
+            }
+            else if(this.overg.b11.hitTestPoint(mouseX,mouseY) && this.upgrades[9][0] > 0)
+            {
+               this.he.visible = true;
+               this.he.x = 284.9;
+               this.he.y = 652.55;
+               this.setforx(10);
+            }
+            else if(this.overg.b12.hitTestPoint(mouseX,mouseY) && this.upgrades[10][0] > 0)
+            {
+               this.he.visible = true;
+               this.he.x = 284.9;
+               this.he.y = 712.35;
+               this.setforx(11);
+            }
+            else
+            {
+               this.he.visible = false;
+            }
+         }
+         else
+         {
+            this.he.visible = false;
+         }
+         if(this.atklvls1[0] < 1)
+         {
+            this.rebwindowt.atas1.visible = false;
+            this.rebwindowt.atasc1.visible = false;
+            this.rebwindowt.whites.abb1.visible = false;
+         }
+         else
+         {
+            this.rebwindowt.atas1.visible = true;
+            this.rebwindowt.atasc1.visible = true;
+            this.rebwindowt.whites.abb1.visible = true;
+         }
+         if(this.atklvls1[1] < 1)
+         {
+            this.rebwindowt.atas2.visible = false;
+            this.rebwindowt.atasc2.visible = false;
+            this.rebwindowt.whites.abb2.visible = false;
+         }
+         else
+         {
+            this.rebwindowt.atas2.visible = true;
+            this.rebwindowt.atasc2.visible = true;
+            this.rebwindowt.whites.abb2.visible = true;
+         }
+         if(this.atklvls1[2] < 1)
+         {
+            this.rebwindowt.atas3.visible = false;
+            this.rebwindowt.atasc3.visible = false;
+            this.rebwindowt.whites.abb3.visible = false;
+         }
+         else
+         {
+            this.rebwindowt.atas3.visible = true;
+            this.rebwindowt.atasc3.visible = true;
+            this.rebwindowt.whites.abb3.visible = true;
+         }
+         if(this.atklvls1[3] < 1)
+         {
+            this.rebwindowt.atas4.visible = false;
+            this.rebwindowt.atasc4.visible = false;
+            this.rebwindowt.whites.abb4.visible = false;
+         }
+         else
+         {
+            this.rebwindowt.atas4.visible = true;
+            this.rebwindowt.atasc4.visible = true;
+            this.rebwindowt.whites.abb4.visible = true;
+         }
+         if(this.atklvls1[4] < 1)
+         {
+            this.rebwindowt.atas5.visible = false;
+            this.rebwindowt.atasc5.visible = false;
+            this.rebwindowt.whites.abb5.visible = false;
+         }
+         else
+         {
+            this.rebwindowt.atas5.visible = true;
+            this.rebwindowt.atasc5.visible = true;
+            this.rebwindowt.whites.abb5.visible = true;
+         }
+         if(this.atklvls1[5] < 1)
+         {
+            this.rebwindowt.atas6.visible = false;
+            this.rebwindowt.atasc6.visible = false;
+            this.rebwindowt.whites.abb6.visible = false;
+         }
+         else
+         {
+            this.rebwindowt.atas6.visible = true;
+            this.rebwindowt.atasc6.visible = true;
+            this.rebwindowt.whites.abb6.visible = true;
+         }
+         if(this.atklvls1[6] < 1)
+         {
+            this.rebwindowt.atas7.visible = false;
+            this.rebwindowt.atasc7.visible = false;
+            this.rebwindowt.whites.abb7.visible = false;
+         }
+         else
+         {
+            this.rebwindowt.atas7.visible = true;
+            this.rebwindowt.atasc7.visible = true;
+            this.rebwindowt.whites.abb7.visible = true;
+         }
+         if(this.atklvls1[7] < 1)
+         {
+            this.rebwindowt.atas8.visible = false;
+            this.rebwindowt.atasc8.visible = false;
+            this.rebwindowt.whites.abb8.visible = false;
+         }
+         else
+         {
+            this.rebwindowt.atas8.visible = true;
+            this.rebwindowt.atasc8.visible = true;
+            this.rebwindowt.whites.abb8.visible = true;
+         }
+         if(this.atklvls1[8] < 1)
+         {
+            this.rebwindowt.atas9.visible = false;
+            this.rebwindowt.atasc9.visible = false;
+            this.rebwindowt.whites.abb9.visible = false;
+         }
+         else
+         {
+            this.rebwindowt.atas9.visible = true;
+            this.rebwindowt.atasc9.visible = true;
+            this.rebwindowt.whites.abb9.visible = true;
+         }
+         if(this.atklvls1[9] < 1)
+         {
+            this.rebwindowt.atas10.visible = false;
+            this.rebwindowt.atasc10.visible = false;
+            this.rebwindowt.whites.abb10.visible = false;
+         }
+         else
+         {
+            this.rebwindowt.atas10.visible = true;
+            this.rebwindowt.atasc10.visible = true;
+            this.rebwindowt.whites.abb10.visible = true;
+         }
+         if(this.atklvls1[10] < 1)
+         {
+            this.rebwindowt.atas11.visible = false;
+            this.rebwindowt.atasc11.visible = false;
+            this.rebwindowt.whites.abb11.visible = false;
+         }
+         else
+         {
+            this.rebwindowt.atas11.visible = true;
+            this.rebwindowt.atasc11.visible = true;
+            this.rebwindowt.whites.abb11.visible = true;
+         }
+         if(this.atklvls1[11] < 1)
+         {
+            this.rebwindowt.atas12.visible = false;
+            this.rebwindowt.atasc12.visible = false;
+            this.rebwindowt.whites.abb12.visible = false;
+         }
+         else
+         {
+            this.rebwindowt.atas12.visible = true;
+            this.rebwindowt.atasc12.visible = true;
+            this.rebwindowt.whites.abb12.visible = true;
+         }
+      }
+      
+      public function setforx(a:Number) : *
+      {
+         this.he.helpless.colordown.gotoAndStop(a + 1);
+         this.he.helpless.st1.text = "Ascension #" + Math.round(this.upgrades[a][2] / this.promi[3] - 1);
+         this.he.helpless.st2.text = "Level: " + Math.round(this.upgrades[a][0]) + "/" + Math.round(this.upgrades[a][2]);
+         if(this.upgrades[a][6] + this.superbonus >= 0)
+         {
+            this.he.helpless.st3.text = "MPL: " + this.short(this.upgrades[a][6] + this.superbonus);
+         }
+         else
+         {
+            this.he.helpless.st3.text = "MPL: " + Math.round(Math.pow(1000,this.upgrades[a][6] + this.superbonus) * 1000) / 1000;
+         }
+         if(this.atksunl == 1)
+         {
+            this.he.helpless.st4.visible = true;
+            this.he.helpless.st4.text = "Atk/Lap: " + this.short(this.atcir[a]);
+         }
+         else
+         {
+            this.he.helpless.st4.visible = false;
+         }
+      }
+      
+      public function goodbye(e:MouseEvent) : *
+      {
+         this.fully();
+      }
+      
+      public function fully() : *
+      {
+         if(this.keynow == 17)
+         {
+            this.stopall = 1;
+            this.atksunl = 0;
+            this.curst = 1;
+            this.hps = [1 / 3,1 / 3];
+            this.maxmapa = 0;
+            this.reb_ = [0,0];
+            this.autobuy = [0,0];
+            this.autoasc = [0,0];
+            this.atklvls1 = [0,0,0,0,0,0,0,0,0,0,0,0];
+            this.atklvls2 = [0,0,0,0,0,0,0,0,0,0,0,0];
+            this.atkcosts1 = [0,1,2,3,4,5,6,7,8,9,10,11];
+            this.atkcosts2 = [5,6,7,8,9,10,11,12,13,14,15,16];
+            this.amtyp = 1;
+            this.ambs = [[1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1]];
+            this.promi = [0,1,0,100];
+            this.maxpr = [1,1,0,0];
+            this.prused = [0,0,0,0];
+            this.prestige = [1,1,0,0];
+            this.logs1000m = [0.00706309968997936,0.0137975617194084,0.0202326134512039,0.0263937486825416,0.0323033376693521,0.0379811174356123,0.0434445894983354,0.0487093452260793,0.053789334078325,0.0586970863518938,0.0634438993900972,0.0680399942186416];
+            this.money = -2;
+            this.allmoney = -2;
+            this.circles = [0,0,0,0,0,0,0,0,0,0,0,0];
+            this.multius = [0,0,0,0,0,0,0,0,0,0,0,0];
+            this.upgrades = [[5,0.06 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],1 / 3.36,this.logs1000m[0],1 / 3.36,-(2 / 3) + this.promi[0]],[0,0.03 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],2 / 3,this.logs1000m[1],2 / 3,-(2 / 3) + this.promi[0]],[0,0.02 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],3 / 3,this.logs1000m[2],3 / 3,-(2 / 3) + this.promi[0]],[0,0.015 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],4 / 3,this.logs1000m[3],4 / 3,-(2 / 3) + this.promi[0]],[0,0.012 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],5 / 3,this.logs1000m[4],5 / 3,-(2 / 3) + this.promi[0]],[0,0.01 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],6 / 3,this.logs1000m[5],6 / 3,-(2 / 3) + this.promi[0]],[0,0.0086 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],9 / 3,this.logs1000m[6],9 / 3,-(2 / 3) + this.promi[0]],[0,0.0075 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],12 / 3,this.logs1000m[7],12 / 3,-(2 / 3) + this.promi[0]],[0,0.00666666666666667 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],15 / 3,this.logs1000m[8],15 / 3,-(2 / 3) + this.promi[0]],[0,0.005 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],21 / 3,this.logs1000m[9],21 / 3,-(2 / 3) + this.promi[0]],[0,0.0025 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],30 / 3,this.logs1000m[10],30 / 3,-(2 / 3) + this.promi[0]],[0,0.001 * this.promi[1] * (Math.round(10 + 5 * this.reb_[1]) / 10),this.promi[3],60 / 3,this.logs1000m[11],60 / 3,-(2 / 3) + this.promi[0]]];
+            this.ascensions = [1 / 3.36 + this.logs1000m[0] * 140,2 / 3 + this.logs1000m[1] * 140,3 / 3 + this.logs1000m[2] * 140,4 / 3 + this.logs1000m[3] * 140,5 / 3 + this.logs1000m[4] * 140,6 / 3 + this.logs1000m[5] * 140,9 / 3 + this.logs1000m[6] * 140,12 / 3 + this.logs1000m[7] * 140,15 / 3 + this.logs1000m[8] * 140,21 / 3 + this.logs1000m[9] * 140,30 / 3 + this.logs1000m[10] * 140,60 / 3 + this.logs1000m[11] * 140];
+            this.income = [0,0];
+            this.stopall = 0;
+         }
+      }
+      
+      public function codicate(b:String) : *
+      {
+         var a:Array = null;
+         a = [];
+         for(this.i84 = 0; this.i84 < b.length; this.i84++)
+         {
+            a.push(b.charAt(this.i84));
+         }
+         for(this.i83 = 0; this.i83 < a.length; this.i83++)
+         {
+            if(a[this.i83] == "a")
+            {
+               a[this.i83] = "Z";
+            }
+            else if(a[this.i83] == "b")
+            {
+               a[this.i83] = "Y";
+            }
+            else if(a[this.i83] == "c")
+            {
+               a[this.i83] = "X";
+            }
+            else if(a[this.i83] == "d")
+            {
+               a[this.i83] = "W";
+            }
+            else if(a[this.i83] == "e")
+            {
+               a[this.i83] = "V";
+            }
+            else if(a[this.i83] == "f")
+            {
+               a[this.i83] = "U";
+            }
+            else if(a[this.i83] == "g")
+            {
+               a[this.i83] = "T";
+            }
+            else if(a[this.i83] == "h")
+            {
+               a[this.i83] = "S";
+            }
+            else if(a[this.i83] == "i")
+            {
+               a[this.i83] = "R";
+            }
+            else if(a[this.i83] == "j")
+            {
+               a[this.i83] = "Q";
+            }
+            else if(a[this.i83] == "k")
+            {
+               a[this.i83] = "P";
+            }
+            else if(a[this.i83] == "l")
+            {
+               a[this.i83] = "O";
+            }
+            else if(a[this.i83] == "m")
+            {
+               a[this.i83] = "N";
+            }
+            else if(a[this.i83] == "n")
+            {
+               a[this.i83] = "M";
+            }
+            else if(a[this.i83] == "o")
+            {
+               a[this.i83] = "L";
+            }
+            else if(a[this.i83] == "p")
+            {
+               a[this.i83] = "K";
+            }
+            else if(a[this.i83] == "q")
+            {
+               a[this.i83] = "J";
+            }
+            else if(a[this.i83] == "r")
+            {
+               a[this.i83] = "I";
+            }
+            else if(a[this.i83] == "s")
+            {
+               a[this.i83] = "H";
+            }
+            else if(a[this.i83] == "t")
+            {
+               a[this.i83] = "G";
+            }
+            else if(a[this.i83] == "u")
+            {
+               a[this.i83] = "F";
+            }
+            else if(a[this.i83] == "v")
+            {
+               a[this.i83] = "E";
+            }
+            else if(a[this.i83] == "w")
+            {
+               a[this.i83] = "D";
+            }
+            else if(a[this.i83] == "x")
+            {
+               a[this.i83] = "C";
+            }
+            else if(a[this.i83] == "y")
+            {
+               a[this.i83] = "B";
+            }
+            else if(a[this.i83] == "z")
+            {
+               a[this.i83] = "A";
+            }
+            else if(a[this.i83] == "A")
+            {
+               a[this.i83] = "z";
+            }
+            else if(a[this.i83] == "B")
+            {
+               a[this.i83] = "y";
+            }
+            else if(a[this.i83] == "C")
+            {
+               a[this.i83] = "x";
+            }
+            else if(a[this.i83] == "D")
+            {
+               a[this.i83] = "w";
+            }
+            else if(a[this.i83] == "E")
+            {
+               a[this.i83] = "v";
+            }
+            else if(a[this.i83] == "F")
+            {
+               a[this.i83] = "u";
+            }
+            else if(a[this.i83] == "G")
+            {
+               a[this.i83] = "t";
+            }
+            else if(a[this.i83] == "H")
+            {
+               a[this.i83] = "s";
+            }
+            else if(a[this.i83] == "I")
+            {
+               a[this.i83] = "r";
+            }
+            else if(a[this.i83] == "J")
+            {
+               a[this.i83] = "q";
+            }
+            else if(a[this.i83] == "K")
+            {
+               a[this.i83] = "p";
+            }
+            else if(a[this.i83] == "L")
+            {
+               a[this.i83] = "o";
+            }
+            else if(a[this.i83] == "M")
+            {
+               a[this.i83] = "n";
+            }
+            else if(a[this.i83] == "N")
+            {
+               a[this.i83] = "m";
+            }
+            else if(a[this.i83] == "O")
+            {
+               a[this.i83] = "l";
+            }
+            else if(a[this.i83] == "P")
+            {
+               a[this.i83] = "k";
+            }
+            else if(a[this.i83] == "Q")
+            {
+               a[this.i83] = "j";
+            }
+            else if(a[this.i83] == "R")
+            {
+               a[this.i83] = "i";
+            }
+            else if(a[this.i83] == "S")
+            {
+               a[this.i83] = "h";
+            }
+            else if(a[this.i83] == "T")
+            {
+               a[this.i83] = "g";
+            }
+            else if(a[this.i83] == "U")
+            {
+               a[this.i83] = "f";
+            }
+            else if(a[this.i83] == "V")
+            {
+               a[this.i83] = "e";
+            }
+            else if(a[this.i83] == "W")
+            {
+               a[this.i83] = "d";
+            }
+            else if(a[this.i83] == "X")
+            {
+               a[this.i83] = "c";
+            }
+            else if(a[this.i83] == "Y")
+            {
+               a[this.i83] = "b";
+            }
+            else if(a[this.i83] == "Z")
+            {
+               a[this.i83] = "a";
+            }
+         }
+         b = "";
+         for(this.i83 = 0; this.i83 < a.length; this.i83++)
+         {
+            b = b + a[this.i83];
+         }
+         return b;
+      }
+      
+      public function strarrev(s:Array) : *
+      {
+         for(this.i79 = 0; this.i79 < s.length; this.i79++)
+         {
+            if(s[this.i79] is Number == 0)
+            {
+               s[this.i79] = Number(s[this.i79]);
+            }
+         }
+         return s;
+      }
+      
+      public function str(s:Object) : *
+      {
+         if(s is Number == 0)
+         {
+            s = Number(s);
+         }
+         return s;
+      }
+      
+      public function strarr(s:Array, e:Array) : *
+      {
+         for(this.i80 = 0; this.i80 < e.length; this.i80++)
+         {
+            if(s[e[this.i80]] is Number == 0)
+            {
+               s[e[this.i80]] = Number(s[e[this.i80]]);
+            }
+         }
+         return s;
+      }
+      
+      public function strdoublearr(s:Array, e:Array) : *
+      {
+         for(this.i82 = 0; this.i82 < s.length; this.i82++)
+         {
+            for(this.i81 = 0; this.i81 < e.length; this.i81++)
+            {
+               if(s[this.i82][e[this.i81]] is Number == 0)
+               {
+                  s[this.i82][e[this.i81]] = Number(s[this.i82][e[this.i81]]);
+               }
+            }
+         }
+         return s;
+      }
+      
+      public function strdoublearrall(s:Array) : *
+      {
+         for(this.i82 = 0; this.i82 < s.length; this.i82++)
+         {
+            for(this.i81 = 0; this.i81 < s[this.i82].length; this.i81++)
+            {
+               if(s[this.i82][this.i81] is Number == 0)
+               {
+                  s[this.i82][this.i81] = Number(s[this.i82][this.i81]);
+               }
+            }
+         }
+         return s;
+      }
+      
+      public function StrToArray(ar:Array) : *
+      {
+         var nstring:String = "";
+         nstring = "" + ar;
+         return nstring;
+      }
+      
+      public function checkok(s:Object) : *
+      {
+         if(s is Number == true && !!s)
+         {
+            return 1;
+         }
+         if(s != 0)
+         {
+            return 0;
+         }
+         return 1;
+      }
+      
+      public function checkokarray(s:Array, e:Array) : *
+      {
+         var itsok:* = 0;
+         for(this.i76 = 0; this.i76 < e.length; this.i76++)
+         {
+            if(s[e[this.i76]] is Number == true && !!s[e[this.i76]])
+            {
+               itsok = itsok + 0;
+            }
+            else if(s[e[this.i76]] != 0)
+            {
+               itsok = itsok + 1;
+            }
+         }
+         if(itsok > 0)
+         {
+            return 0;
+         }
+         return 1;
+      }
+      
+      public function checkokarrayev(s:Array) : *
+      {
+         var itsok:* = 0;
+         for(this.i76 = 0; this.i76 < s.length; this.i76++)
+         {
+            if(s[this.i76] is Number == true && !!s[this.i76])
+            {
+               itsok = itsok + 0;
+            }
+            else if(s[this.i76] != 0)
+            {
+               itsok = itsok + 1;
+            }
+         }
+         if(itsok > 0)
+         {
+            return 0;
+         }
+         return 1;
+      }
+      
+      public function checkokdoublearray(s:Array, e:Array) : *
+      {
+         var itsok2:* = 0;
+         for(this.i78 = 0; this.i78 < s.length; this.i78++)
+         {
+            for(this.i77 = 0; this.i77 < e.length; this.i77++)
+            {
+               if(s[this.i78][e[this.i77]] is Number == true && !!s[this.i78][e[this.i77]])
+               {
+                  itsok2 = itsok2 + 0;
+               }
+               else if(s[this.i78][e[this.i77]] != 0)
+               {
+                  itsok2 = itsok2 + 1;
+               }
+            }
+         }
+         if(itsok2 > 0)
+         {
+            return 0;
+         }
+         return 1;
+      }
+      
+      public function checkokdoublearrayev(s:Array) : *
+      {
+         var itsok3:* = 0;
+         for(this.i78 = 0; this.i78 < s.length; this.i78++)
+         {
+            for(this.i77 = 0; this.i77 < s[this.i78].length; this.i77++)
+            {
+               if(s[this.i78][this.i77] is Number == true && !!s[this.i78][this.i77])
+               {
+                  itsok3 = itsok3 + 0;
+               }
+               else if(s[this.i78][this.i77] != 0)
+               {
+                  itsok3 = itsok3 + 1;
+               }
+            }
+         }
+         if(itsok3 > 0)
+         {
+            return itsok3;
+         }
+         return 1;
+      }
+      
+      public function addArray(ar:Array) : *
+      {
+         var dstring2:String = "";
+         for(this.i73 = 0; this.i73 < ar.length; this.i73++)
+         {
+            if(this.i73 >= ar.length - 1)
+            {
+               dstring2 = dstring2 + ("" + ar[this.i73]);
+            }
+            else
+            {
+               dstring2 = dstring2 + ("" + ar[this.i73] + ",");
+            }
+         }
+         return dstring2;
+      }
+      
+      public function addDoubleArray(ar:Array) : *
+      {
+         var dstring:* = "";
+         for(this.i71 = 0; this.i71 < ar.length; this.i71++)
+         {
+            for(this.i72 = 0; this.i72 < ar[this.i71].length; this.i72++)
+            {
+               if(this.i72 >= ar[this.i71].length - 1)
+               {
+                  dstring = dstring + ("" + ar[this.i71][this.i72]);
+               }
+               else
+               {
+                  dstring = dstring + ("" + ar[this.i71][this.i72] + ",");
+               }
+            }
+            if(this.i71 < ar.length - 1)
+            {
+               dstring = dstring + ";";
+            }
+         }
+         return dstring;
+      }
+      
+      public function takeArray(ar:Array) : *
+      {
+         var cray:Array = null;
+         cray = [];
+         for(this.i74 = 0; this.i74 < ar.length; this.i74++)
+         {
+            cray.push(ar[this.i74]);
+         }
+         return cray;
+      }
+      
+      public function takeDoubleArray1(ar:String) : *
+      {
+         var cray2:Array = null;
+         var cray3:Array = null;
+         cray2 = [];
+         cray2 = this.ttf.text.split(";");
+         cray3 = [];
+         for(this.i75 = 0; this.i75 < cray2.length; this.i75++)
+         {
+            this.ttf.text = cray2[this.i75];
+            cray3.push([]);
+            cray3[this.i75] = this.ttf.text.split(",");
+         }
+         return cray3;
+      }
+      
+      public function iclck(e:MouseEvent) : *
+      {
+         var stringimxp:String = "";
+         stringimxp = stringimxp + (this.addArray(this.logs1000m) + "|");
+         stringimxp = stringimxp + (this.money + "|");
+         stringimxp = stringimxp + (this.allmoney + "|");
+         stringimxp = stringimxp + (this.addArray(this.circles) + "|");
+         stringimxp = stringimxp + (this.addArray(this.multius) + "|");
+         stringimxp = stringimxp + (this.addDoubleArray(this.upgrades) + "|");
+         stringimxp = stringimxp + (this.addArray(this.ascensions) + "|");
+         stringimxp = stringimxp + (this.addArray(this.prestige) + "|");
+         stringimxp = stringimxp + (this.addArray(this.income) + "|");
+         stringimxp = stringimxp + (this.spedtime + "|");
+         stringimxp = stringimxp + (this.cheater + "|");
+         stringimxp = stringimxp + (this.addArray(this.promi) + "|");
+         stringimxp = stringimxp + (this.addArray(this.maxpr) + "|");
+         stringimxp = stringimxp + (this.addArray(this.prused) + "|");
+         stringimxp = stringimxp + (this.addArray(this.optis) + "|");
+         stringimxp = stringimxp + (this.musicis + "|");
+         stringimxp = stringimxp + (this.atksunl + "|");
+         stringimxp = stringimxp + (this.curst + "|");
+         stringimxp = stringimxp + (this.addArray(this.hps) + "|");
+         stringimxp = stringimxp + (this.maxmapa + "|");
+         stringimxp = stringimxp + (this.addArray(this.reb_) + "|");
+         stringimxp = stringimxp + (this.addArray(this.autobuy) + "|");
+         stringimxp = stringimxp + (this.addArray(this.autoasc) + "|");
+         stringimxp = stringimxp + (this.addArray(this.atklvls1) + "|");
+         stringimxp = stringimxp + (this.addArray(this.atklvls2) + "|");
+         stringimxp = stringimxp + (this.addArray(this.atkcosts1) + "|");
+         stringimxp = stringimxp + (this.addArray(this.atkcosts2) + "|");
+         stringimxp = stringimxp + (this.amtyp + "|");
+         stringimxp = stringimxp + (this.newopti + "|");
+         stringimxp = stringimxp + this.v161;
+         this.optwindowt.inputt.text = "" + stringimxp;
+         this.optwindowt.inputt.text = ageCrypt.encode(this.optwindowt.inputt.text);
+         this.optwindowt.inputt.text = this.codicate(this.optwindowt.inputt.text);
+      }
+      
+      public function iclck2(e:MouseEvent) : *
+      {
+         this.optwindowt.inputt.text = this.codicate(this.optwindowt.inputt.text);
+         this.optwindowt.inputt.text = ageCrypt.decode(this.optwindowt.inputt.text);
+         this.datamassives = this.optwindowt.inputt.text.split("|");
+         trace(this.datamassives.length);
+         if(this.datamassives.length == 30)
+         {
+            this.ttf.text = this.datamassives[0] + "";
+            this.datamassive[0] = this.ttf.text.split(",");
+            this.datamassive[0] = this.strarrev(this.datamassive[0]);
+            this.ttf.text = this.datamassives[1] + "";
+            this.datamassive[1] = this.ttf.text;
+            this.datamassive[1] = this.str(this.datamassive[1]);
+            this.ttf.text = this.datamassives[2] + "";
+            this.datamassive[2] = this.ttf.text;
+            this.datamassive[2] = this.str(this.datamassive[2]);
+            this.ttf.text = this.datamassives[3] + "";
+            this.datamassive[3] = this.ttf.text.split(",");
+            this.datamassive[3] = this.strarrev(this.datamassive[3]);
+            this.ttf.text = this.datamassives[4] + "";
+            this.datamassive[4] = this.ttf.text.split(",");
+            this.datamassive[4] = this.strarrev(this.datamassive[4]);
+            this.ttf.text = this.datamassives[5] + "";
+            this.datamassive[5] = this.takeDoubleArray1(this.ttf.text);
+            this.datamassive[5] = this.strdoublearrall(this.datamassive[5]);
+            this.ttf.text = this.datamassives[6] + "";
+            this.datamassive[6] = this.ttf.text.split(",");
+            this.datamassive[6] = this.strarrev(this.datamassive[6]);
+            this.ttf.text = this.datamassives[7] + "";
+            this.datamassive[7] = this.ttf.text.split(",");
+            this.datamassive[7] = this.strarrev(this.datamassive[7]);
+            this.ttf.text = this.datamassives[8] + "";
+            this.datamassive[8] = this.ttf.text.split(",");
+            this.datamassive[8] = this.strarrev(this.datamassive[8]);
+            this.ttf.text = this.datamassives[9] + "";
+            this.datamassive[9] = this.ttf.text;
+            this.datamassive[9] = this.str(this.datamassive[9]);
+            this.ttf.text = this.datamassives[10] + "";
+            this.datamassive[10] = this.ttf.text;
+            this.datamassive[10] = this.str(this.datamassive[10]);
+            this.ttf.text = this.datamassives[11] + "";
+            this.datamassive[11] = this.ttf.text.split(",");
+            this.datamassive[11] = this.strarrev(this.datamassive[11]);
+            this.ttf.text = this.datamassives[12] + "";
+            this.datamassive[12] = this.ttf.text.split(",");
+            this.datamassive[12] = this.strarrev(this.datamassive[12]);
+            this.ttf.text = this.datamassives[13] + "";
+            this.datamassive[13] = this.ttf.text.split(",");
+            this.datamassive[13] = this.strarrev(this.datamassive[13]);
+            this.ttf.text = this.datamassives[14] + "";
+            this.datamassive[14] = this.ttf.text.split(",");
+            this.datamassive[14] = this.strarrev(this.datamassive[14]);
+            this.ttf.text = this.datamassives[15] + "";
+            this.datamassive[15] = this.ttf.text;
+            this.datamassive[15] = this.str(this.datamassive[15]);
+            this.ttf.text = this.datamassives[16] + "";
+            this.datamassive[16] = this.ttf.text;
+            this.datamassive[16] = this.str(this.datamassive[16]);
+            this.ttf.text = this.datamassives[17] + "";
+            this.datamassive[17] = this.ttf.text;
+            this.datamassive[17] = this.str(this.datamassive[17]);
+            this.ttf.text = this.datamassives[18] + "";
+            this.datamassive[18] = this.ttf.text.split(",");
+            this.datamassive[18] = this.strarrev(this.datamassive[18]);
+            this.ttf.text = this.datamassives[19] + "";
+            this.datamassive[19] = this.ttf.text;
+            this.datamassive[19] = this.str(this.datamassive[19]);
+            this.ttf.text = this.datamassives[20] + "";
+            this.datamassive[20] = this.ttf.text.split(",");
+            this.datamassive[20] = this.strarrev(this.datamassive[20]);
+            this.ttf.text = this.datamassives[21] + "";
+            this.datamassive[21] = this.ttf.text.split(",");
+            this.datamassive[21] = this.strarrev(this.datamassive[21]);
+            this.ttf.text = this.datamassives[22] + "";
+            this.datamassive[22] = this.ttf.text.split(",");
+            this.datamassive[22] = this.strarrev(this.datamassive[22]);
+            this.ttf.text = this.datamassives[23] + "";
+            this.datamassive[23] = this.ttf.text.split(",");
+            this.datamassive[23] = this.strarrev(this.datamassive[23]);
+            this.ttf.text = this.datamassives[24] + "";
+            this.datamassive[24] = this.ttf.text.split(",");
+            this.datamassive[24] = this.strarrev(this.datamassive[24]);
+            this.ttf.text = this.datamassives[25] + "";
+            this.datamassive[25] = this.ttf.text.split(",");
+            this.datamassive[25] = this.strarrev(this.datamassive[25]);
+            this.ttf.text = this.datamassives[26] + "";
+            this.datamassive[26] = this.ttf.text.split(",");
+            this.datamassive[26] = this.strarrev(this.datamassive[26]);
+            this.ttf.text = this.datamassives[27] + "";
+            this.datamassive[27] = this.ttf.text;
+            this.datamassive[27] = this.str(this.datamassive[27]);
+            this.ttf.text = this.datamassives[28] + "";
+            this.datamassive[28] = this.ttf.text;
+            this.datamassive[28] = this.str(this.datamassive[28]);
+            this.ttf.text = this.datamassives[29] + "";
+            this.datamassive[29] = this.ttf.text;
+            this.datamassive[29] = this.str(this.datamassive[29]);
+            this.fully();
+            if(this.checkokarrayev(this.datamassive[0]) == 1)
+            {
+               this.logs1000m = this.takeArray(this.datamassive[0]);
+            }
+            if(this.checkok(this.datamassive[1]) == 1)
+            {
+               this.money = this.datamassive[1];
+            }
+            if(this.checkok(this.datamassive[2]) == 1)
+            {
+               this.allmoney = this.datamassive[2];
+            }
+            if(this.checkokarrayev(this.datamassive[3]) == 1)
+            {
+               this.circles = this.takeArray(this.datamassive[3]);
+            }
+            if(this.checkokarrayev(this.datamassive[4]) == 1)
+            {
+               this.multius = this.takeArray(this.datamassive[4]);
+            }
+            if(this.checkokdoublearrayev(this.datamassive[5]) == 1)
+            {
+               this.upgrades = this.takeArray(this.datamassive[5]);
+            }
+            if(this.checkokarrayev(this.datamassive[6]) == 1)
+            {
+               this.ascensions = this.takeArray(this.datamassive[6]);
+            }
+            if(this.checkokarrayev(this.datamassive[7]) == 1)
+            {
+               this.prestige = this.takeArray(this.datamassive[7]);
+            }
+            if(this.checkokarrayev(this.datamassive[8]) == 1)
+            {
+               this.income = this.takeArray(this.datamassive[8]);
+            }
+            if(this.checkok(this.datamassive[9]) == 1)
+            {
+               this.spedtime = this.datamassive[9];
+            }
+            if(this.checkok(this.datamassive[10]) == 1)
+            {
+               this.cheater = this.datamassive[10];
+            }
+            if(this.checkokarrayev(this.datamassive[11]) == 1)
+            {
+               this.promi = this.takeArray(this.datamassive[11]);
+            }
+            if(this.checkokarrayev(this.datamassive[12]) == 1)
+            {
+               this.maxpr = this.takeArray(this.datamassive[12]);
+            }
+            if(this.checkokarrayev(this.datamassive[13]) == 1)
+            {
+               this.prused = this.takeArray(this.datamassive[13]);
+            }
+            if(this.checkokarrayev(this.datamassive[14]) == 1)
+            {
+               this.optis = this.takeArray(this.datamassive[14]);
+            }
+            if(this.checkok(this.datamassive[15]) == 1)
+            {
+               this.musicis = this.datamassive[15];
+            }
+            if(this.checkok(this.datamassive[16]) == 1)
+            {
+               this.atksunl = this.datamassive[16];
+            }
+            if(this.checkok(this.datamassive[17]) == 1)
+            {
+               this.curst = this.datamassive[17];
+            }
+            if(this.checkokarrayev(this.datamassive[18]) == 1)
+            {
+               this.hps = this.takeArray(this.datamassive[18]);
+            }
+            if(this.checkok(this.datamassive[19]) == 1)
+            {
+               this.maxmapa = this.datamassive[19];
+            }
+            if(this.checkokarrayev(this.datamassive[20]) == 1)
+            {
+               this.reb_ = this.takeArray(this.datamassive[20]);
+            }
+            if(this.checkokarrayev(this.datamassive[21]) == 1)
+            {
+               this.autobuy = this.takeArray(this.datamassive[21]);
+            }
+            if(this.checkokarrayev(this.datamassive[22]) == 1)
+            {
+               this.autoasc = this.takeArray(this.datamassive[22]);
+            }
+            if(this.checkokarrayev(this.datamassive[23]) == 1)
+            {
+               this.atklvls1 = this.takeArray(this.datamassive[23]);
+            }
+            if(this.checkokarrayev(this.datamassive[24]) == 1)
+            {
+               this.atklvls2 = this.takeArray(this.datamassive[24]);
+            }
+            if(this.checkokarrayev(this.datamassive[25]) == 1)
+            {
+               this.atkcosts1 = this.takeArray(this.datamassive[25]);
+            }
+            if(this.checkokarrayev(this.datamassive[26]) == 1)
+            {
+               this.atkcosts2 = this.takeArray(this.datamassive[26]);
+            }
+            if(this.checkok(this.datamassive[27]) == 1)
+            {
+               this.amtyp = this.datamassive[27];
+            }
+            if(this.checkok(this.datamassive[28]) == 1)
+            {
+               this.newopti = this.datamassive[28];
+            }
+            if(this.checkok(this.datamassive[29]) == 1)
+            {
+               this.v161 = this.datamassive[29];
+            }
+            this.changeoptus();
+         }
+         this.optwindowt.inputt.text = ageCrypt.encode(this.optwindowt.inputt.text);
+         this.optwindowt.inputt.text = this.codicate(this.optwindowt.inputt.text);
+      }
+      
+      public function setbuff(e:MouseEvent) : *
+      {
+         System.setClipboard(this.optwindowt.inputt.text);
+      }
+      
+      public function clearr(e:MouseEvent) : *
+      {
+         this.optwindowt.inputt.text = "";
       }
       
       function frame1() : *
@@ -4481,6 +6593,7 @@ package RI2_fla
       function frame2() : *
       {
          stop();
+         this.note = "WTF, GeneralYouri, how do you get my source???";
          this.data1 = new Date();
          this.data2 = new Date();
          this.fps = 0;
@@ -4500,9 +6613,48 @@ package RI2_fla
          this.base_music = [0.16,0];
          this.trans2 = new SoundTransform(this.base_music[0],0);
          this.kanal = this.musica.play(0,999,this.trans2);
+         this.datamassive = [[],[]];
+         this.i71 = 0;
+         this.i72 = 0;
+         this.i73 = 0;
+         this.i74 = 0;
+         this.i75 = 0;
+         this.i76 = 0;
+         this.i77 = 0;
+         this.i78 = 0;
+         this.i79 = 0;
+         this.i80 = 0;
+         this.i81 = 0;
+         this.i82 = 0;
+         this.i83 = 0;
+         this.i84 = 0;
+         this.datamassives = [[],[]];
+         this.atksunl = 0;
+         this.curst = 1;
+         this.hps = [1 / 3,1 / 3];
+         this.i3 = 0;
+         this.i4 = 0;
+         this.maxmapa = 0;
+         this.reb_ = [0,0];
+         this.autobuy = [0,0];
+         this.autoasc = [0,0];
+         this.atklvls1 = [0,0,0,0,0,0,0,0,0,0,0,0];
+         this.atklvls2 = [0,0,0,0,0,0,0,0,0,0,0,0];
+         this.atkcosts1 = [0,1,2,3,4,5,6,7,8,9,10,11];
+         this.atkcosts2 = [5,6,7,8,9,10,11,12,13,14,15,16];
+         this.amtyp = 1;
+         this.ambs = [[1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1]];
+         this.atcir = [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
          this.optis = [3,1,1,2];
+         this.newopti = 1;
+         this.superbonus = 0;
+         this.curams = 0;
+         this.mccst2 = 0;
+         this.newcost = 0;
+         this.v161 = 0;
          this.promwindowt = new promwindow();
          this.optwindowt = new optwindow();
+         this.rebwindowt = new rebwindow();
          this.menu = new ContextMenu();
          this.menu.hideBuiltInItems();
          this.contextMenu = this.menu;
@@ -4513,6 +6665,12 @@ package RI2_fla
          this.ammies.buy50ps.gotoAndStop(1);
          this.ammies.buymax.gotoAndStop(1);
          this.ammies.buyall.gotoAndStop(1);
+         this.rebwindowt.ammies.buy1.gotoAndStop(1);
+         this.rebwindowt.ammies.buy10.gotoAndStop(1);
+         this.rebwindowt.ammies.buy100.gotoAndStop(1);
+         this.rebwindowt.ammies.buy10ps.gotoAndStop(1);
+         this.rebwindowt.ammies.buy50ps.gotoAndStop(1);
+         this.rebwindowt.ammies.buymax.gotoAndStop(1);
          this.overg.b1.gotoAndStop(1);
          this.overg.b2.gotoAndStop(1);
          this.overg.b3.gotoAndStop(1);
@@ -4581,6 +6739,20 @@ package RI2_fla
             this.speedis = 0;
             this.musicis = 1;
             this.optis = [3,1,1,2];
+            this.atksunl = 0;
+            this.curst = 1;
+            this.hps = [1 / 3,1 / 3];
+            this.maxmapa = 0;
+            this.reb_ = [0,0];
+            this.autobuy = [0,0];
+            this.autoasc = [0,0];
+            this.atklvls1 = [0,0,0,0,0,0,0,0,0,0,0,0];
+            this.atklvls2 = [0,0,0,0,0,0,0,0,0,0,0,0];
+            this.atkcosts1 = [0,1,2,3,4,5,6,7,8,9,10,11];
+            this.atkcosts2 = [5,6,7,8,9,10,11,12,13,14,15,16];
+            this.amtyp = 1;
+            this.ambs = [[1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1]];
+            this.v161 = 0;
          }
          else
          {
@@ -4633,6 +6805,50 @@ package RI2_fla
                {
                   this.optis = this.mySharedObject.data.optis;
                }
+               if(!this.mySharedObject.data.maxmapa)
+               {
+                  this.atksunl = 0;
+                  this.curst = 1;
+                  this.hps = [2 / 3,2 / 3];
+                  this.maxmapa = 0;
+                  this.reb_ = [0,0];
+                  this.autobuy = [0,0];
+                  this.autoasc = [0,0];
+                  this.atklvls1 = [0,0,0,0,0,0,0,0,0,0,0,0];
+                  this.atklvls2 = [0,0,0,0,0,0,0,0,0,0,0,0];
+                  this.atkcosts1 = [0,1,2,3,4,5,6,7,8,9,10,11];
+                  this.atkcosts2 = [5,6,7,8,9,10,11,12,13,14,15,16];
+                  this.amtyp = 1;
+                  this.ambs = [[1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1]];
+                  this.newopti = 1;
+               }
+               else
+               {
+                  this.atksunl = this.mySharedObject.data.atksunl;
+                  this.curst = this.mySharedObject.data.curst;
+                  this.hps = this.mySharedObject.data.hps;
+                  this.maxmapa = this.mySharedObject.data.maxmapa;
+                  this.reb_ = this.mySharedObject.data.reb_;
+                  this.autobuy = this.mySharedObject.data.autobuy;
+                  this.autoasc = this.mySharedObject.data.autoasc;
+                  this.atklvls1 = this.mySharedObject.data.atklvls1;
+                  this.atklvls2 = this.mySharedObject.data.atklvls2;
+                  this.atkcosts1 = this.mySharedObject.data.atkcosts1;
+                  this.atkcosts2 = this.mySharedObject.data.atkcosts2;
+                  this.amtyp = this.mySharedObject.data.amtyp;
+                  this.ambs = this.mySharedObject.data.ambs;
+                  this.newopti = this.mySharedObject.data.newopti;
+               }
+               if(!this.mySharedObject.data.v161)
+               {
+                  this.curst = 1;
+                  this.hps = [2 / 3,2 / 3];
+                  this.v161 = 1;
+               }
+               else
+               {
+                  this.v161 = this.mySharedObject.data.v161;
+               }
                if(this.timing2 - this.timing1 >= 1000000 && this.cheater == 0)
                {
                   this.spedtime = Math.round(Math.pow((this.timing2 - this.timing1) / 1000000 + Math.pow(this.spedtime,1 / 0.75),0.75) * 10) / 10;
@@ -4662,6 +6878,7 @@ package RI2_fla
             this.changeoptus();
          }
          this.stopall = 0;
+         this.changeoptus();
          stage.addEventListener(Event.ENTER_FRAME,this.math);
          stage.addEventListener(Event.ENTER_FRAME,this.main);
          this.ammies.buy1.addEventListener(MouseEvent.CLICK,this.set_1);
@@ -4671,6 +6888,12 @@ package RI2_fla
          this.ammies.buy50ps.addEventListener(MouseEvent.CLICK,this.set_5);
          this.ammies.buymax.addEventListener(MouseEvent.CLICK,this.set_6);
          this.ammies.buyall.addEventListener(MouseEvent.CLICK,this.set_7);
+         this.rebwindowt.ammies.buy1.addEventListener(MouseEvent.CLICK,this.setn_1);
+         this.rebwindowt.ammies.buy10.addEventListener(MouseEvent.CLICK,this.setn_2);
+         this.rebwindowt.ammies.buy100.addEventListener(MouseEvent.CLICK,this.setn_3);
+         this.rebwindowt.ammies.buy10ps.addEventListener(MouseEvent.CLICK,this.setn_4);
+         this.rebwindowt.ammies.buy50ps.addEventListener(MouseEvent.CLICK,this.setn_5);
+         this.rebwindowt.ammies.buymax.addEventListener(MouseEvent.CLICK,this.setn_6);
          this.ammies.buy1.addEventListener(MouseEvent.MOUSE_OVER,this.over_b1);
          this.ammies.buy1.addEventListener(MouseEvent.MOUSE_UP,this.up_b1);
          this.ammies.buy1.addEventListener(MouseEvent.MOUSE_DOWN,this.down_b1);
@@ -4699,6 +6922,30 @@ package RI2_fla
          this.ammies.buyall.addEventListener(MouseEvent.MOUSE_UP,this.up_ball);
          this.ammies.buyall.addEventListener(MouseEvent.MOUSE_DOWN,this.down_ball);
          this.ammies.buyall.addEventListener(MouseEvent.MOUSE_OUT,this.out_ball);
+         this.rebwindowt.ammies.buy1.addEventListener(MouseEvent.MOUSE_OVER,this.over_rebb1);
+         this.rebwindowt.ammies.buy1.addEventListener(MouseEvent.MOUSE_UP,this.up_rebb1);
+         this.rebwindowt.ammies.buy1.addEventListener(MouseEvent.MOUSE_DOWN,this.down_rebb1);
+         this.rebwindowt.ammies.buy1.addEventListener(MouseEvent.MOUSE_OUT,this.out_rebb1);
+         this.rebwindowt.ammies.buy10.addEventListener(MouseEvent.MOUSE_OVER,this.over_rebb10);
+         this.rebwindowt.ammies.buy10.addEventListener(MouseEvent.MOUSE_UP,this.up_rebb10);
+         this.rebwindowt.ammies.buy10.addEventListener(MouseEvent.MOUSE_DOWN,this.down_rebb10);
+         this.rebwindowt.ammies.buy10.addEventListener(MouseEvent.MOUSE_OUT,this.out_rebb10);
+         this.rebwindowt.ammies.buy100.addEventListener(MouseEvent.MOUSE_OVER,this.over_rebb100);
+         this.rebwindowt.ammies.buy100.addEventListener(MouseEvent.MOUSE_UP,this.up_rebb100);
+         this.rebwindowt.ammies.buy100.addEventListener(MouseEvent.MOUSE_DOWN,this.down_rebb100);
+         this.rebwindowt.ammies.buy100.addEventListener(MouseEvent.MOUSE_OUT,this.out_rebb100);
+         this.rebwindowt.ammies.buy10ps.addEventListener(MouseEvent.MOUSE_OVER,this.over_rebb10ps);
+         this.rebwindowt.ammies.buy10ps.addEventListener(MouseEvent.MOUSE_UP,this.up_rebb10ps);
+         this.rebwindowt.ammies.buy10ps.addEventListener(MouseEvent.MOUSE_DOWN,this.down_rebb10ps);
+         this.rebwindowt.ammies.buy10ps.addEventListener(MouseEvent.MOUSE_OUT,this.out_rebb10ps);
+         this.rebwindowt.ammies.buy50ps.addEventListener(MouseEvent.MOUSE_OVER,this.over_rebb50ps);
+         this.rebwindowt.ammies.buy50ps.addEventListener(MouseEvent.MOUSE_UP,this.up_rebb50ps);
+         this.rebwindowt.ammies.buy50ps.addEventListener(MouseEvent.MOUSE_DOWN,this.down_rebb50ps);
+         this.rebwindowt.ammies.buy50ps.addEventListener(MouseEvent.MOUSE_OUT,this.out_rebb50ps);
+         this.rebwindowt.ammies.buymax.addEventListener(MouseEvent.MOUSE_OVER,this.over_rebbmax);
+         this.rebwindowt.ammies.buymax.addEventListener(MouseEvent.MOUSE_UP,this.up_rebbmax);
+         this.rebwindowt.ammies.buymax.addEventListener(MouseEvent.MOUSE_DOWN,this.down_rebbmax);
+         this.rebwindowt.ammies.buymax.addEventListener(MouseEvent.MOUSE_OUT,this.out_rebbmax);
          this.upmus.musbt.addEventListener(MouseEvent.MOUSE_OVER,this.muti1);
          this.upmus.musbt.addEventListener(MouseEvent.MOUSE_UP,this.muti2);
          this.upmus.musbt.addEventListener(MouseEvent.MOUSE_DOWN,this.muti3);
@@ -4816,6 +7063,7 @@ package RI2_fla
          this.promwindowt.promdes.p1.overt.addEventListener(MouseEvent.MOUSE_UP,this.prom1_2);
          this.promwindowt.promdes.p1.overt.addEventListener(MouseEvent.MOUSE_DOWN,this.prom1_3);
          this.promwindowt.promdes.p1.overt.addEventListener(MouseEvent.MOUSE_OUT,this.prom1_4);
+         this.rebwindowt.whites.rebbt.addEventListener(MouseEvent.MOUSE_UP,this.rebirthation);
          this.promwindowt.promdes.p2.overt.addEventListener(MouseEvent.MOUSE_OVER,this.prom2_1);
          this.promwindowt.promdes.p2.overt.addEventListener(MouseEvent.MOUSE_UP,this.prom2_2);
          this.promwindowt.promdes.p2.overt.addEventListener(MouseEvent.MOUSE_DOWN,this.prom2_3);
@@ -4834,13 +7082,57 @@ package RI2_fla
          this.optwindowt.optdes.right2.addEventListener(MouseEvent.CLICK,this.goright2);
          this.optwindowt.optdes.right3.addEventListener(MouseEvent.CLICK,this.goright3);
          this.optwindowt.optdes.right4.addEventListener(MouseEvent.CLICK,this.goright4);
+         this.optwindowt.optdes.right5.addEventListener(MouseEvent.CLICK,this.goright5);
          this.optwindowt.optdes.left1.addEventListener(MouseEvent.CLICK,this.goleft1);
          this.optwindowt.optdes.left2.addEventListener(MouseEvent.CLICK,this.goleft2);
          this.optwindowt.optdes.left3.addEventListener(MouseEvent.CLICK,this.goleft3);
          this.optwindowt.optdes.left4.addEventListener(MouseEvent.CLICK,this.goleft4);
+         this.optwindowt.optdes.left5.addEventListener(MouseEvent.CLICK,this.goleft5);
          stage.addEventListener(Event.ENTER_FRAME,this.otobr);
          this.upopt.optb.addEventListener(MouseEvent.CLICK,this.opopt);
          this.optwindowt.optdes.clos.addEventListener(MouseEvent.CLICK,this.clopt);
+         stage.addEventListener(Event.ENTER_FRAME,this.newsmth);
+         this.damteam.rebibut.addEventListener(MouseEvent.CLICK,this.adrb);
+         this.rebwindowt.whites.aab1.addEventListener(MouseEvent.CLICK,this.buy_bon_1_1);
+         this.rebwindowt.whites.aab2.addEventListener(MouseEvent.CLICK,this.buy_bon_1_2);
+         this.rebwindowt.whites.aab3.addEventListener(MouseEvent.CLICK,this.buy_bon_1_3);
+         this.rebwindowt.whites.aab4.addEventListener(MouseEvent.CLICK,this.buy_bon_1_4);
+         this.rebwindowt.whites.aab5.addEventListener(MouseEvent.CLICK,this.buy_bon_1_5);
+         this.rebwindowt.whites.aab6.addEventListener(MouseEvent.CLICK,this.buy_bon_1_6);
+         this.rebwindowt.whites.aab7.addEventListener(MouseEvent.CLICK,this.buy_bon_1_7);
+         this.rebwindowt.whites.aab8.addEventListener(MouseEvent.CLICK,this.buy_bon_1_8);
+         this.rebwindowt.whites.aab9.addEventListener(MouseEvent.CLICK,this.buy_bon_1_9);
+         this.rebwindowt.whites.aab10.addEventListener(MouseEvent.CLICK,this.buy_bon_1_10);
+         this.rebwindowt.whites.aab11.addEventListener(MouseEvent.CLICK,this.buy_bon_1_11);
+         this.rebwindowt.whites.aab12.addEventListener(MouseEvent.CLICK,this.buy_bon_1_12);
+         this.rebwindowt.whites.abb1.addEventListener(MouseEvent.CLICK,this.buy_bon_2_1);
+         this.rebwindowt.whites.abb2.addEventListener(MouseEvent.CLICK,this.buy_bon_2_2);
+         this.rebwindowt.whites.abb3.addEventListener(MouseEvent.CLICK,this.buy_bon_2_3);
+         this.rebwindowt.whites.abb4.addEventListener(MouseEvent.CLICK,this.buy_bon_2_4);
+         this.rebwindowt.whites.abb5.addEventListener(MouseEvent.CLICK,this.buy_bon_2_5);
+         this.rebwindowt.whites.abb6.addEventListener(MouseEvent.CLICK,this.buy_bon_2_6);
+         this.rebwindowt.whites.abb7.addEventListener(MouseEvent.CLICK,this.buy_bon_2_7);
+         this.rebwindowt.whites.abb8.addEventListener(MouseEvent.CLICK,this.buy_bon_2_8);
+         this.rebwindowt.whites.abb9.addEventListener(MouseEvent.CLICK,this.buy_bon_2_9);
+         this.rebwindowt.whites.abb10.addEventListener(MouseEvent.CLICK,this.buy_bon_2_10);
+         this.rebwindowt.whites.abb11.addEventListener(MouseEvent.CLICK,this.buy_bon_2_11);
+         this.rebwindowt.whites.abb12.addEventListener(MouseEvent.CLICK,this.buy_bon_2_12);
+         this.rebwindowt.whites.b_ab.addEventListener(MouseEvent.CLICK,this.buy_abuy);
+         this.rebwindowt.whites.b_aas.addEventListener(MouseEvent.CLICK,this.buy_aasc);
+         this.rebwindowt.others.is_ab.addEventListener(MouseEvent.CLICK,this.actABuy);
+         this.rebwindowt.others.is_aas.addEventListener(MouseEvent.CLICK,this.actAAS);
+         this.rebwindowt.whites.b_batl.addEventListener(MouseEvent.CLICK,this.buybat);
+         this.rebwindowt.others.clos.addEventListener(MouseEvent.CLICK,this.closrb);
+         stage.addEventListener(Event.ENTER_FRAME,this.otherss);
+         this.optwindowt.optdes.fullres.addEventListener(MouseEvent.MOUSE_UP,this.goodbye);
+         if(!this.newopti)
+         {
+            this.newopti = 1;
+         }
+         this.optwindowt.optdes.expbt.addEventListener(MouseEvent.CLICK,this.iclck);
+         this.optwindowt.optdes.impbt.addEventListener(MouseEvent.CLICK,this.iclck2);
+         this.optwindowt.optdes.copybt.addEventListener(MouseEvent.CLICK,this.setbuff);
+         this.optwindowt.optdes.clbt.addEventListener(MouseEvent.CLICK,this.clearr);
       }
    }
 }
