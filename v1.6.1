@@ -3544,7 +3544,7 @@ package RI2_fla
       
       public function buybuilding(a:Number) : *
       {
-         if(this.money >= this.upgrades[a][5] && this.upgrades[a][0] < this.upgrades[a][2])
+         if(this.money >= this.upgrades[a][5] && this.upgrades[a][0] < this.upgrades[a][2] && this.buyamos[a] > 0)
          {
             this.money = this.minuss(this.money,this.upgrades[a][5]);
             this.upgrades[a][0] = this.upgrades[a][0] + this.buyamos[a];
