@@ -350,11 +350,11 @@ package RI2_fla
             {
                this.prestige[0] = 1;
             }
-            if(this.v161 != 2)
+            if(this.v161 != 3)
             {
                this.curst = 1;
                this.hps = [2 / 3,2 / 3];
-               this.v161 = 2;
+               this.v161 = 3;
             }
             trace(this.prestige[1]);
             if(this.circles.length < 12)
@@ -4867,21 +4867,29 @@ package RI2_fla
             {
                this.basmplbonus = this.pluss(0,this.logof(this.curst,1000) * (2.5 + this.curst / 100) - 2 / 3);
             }
-            else if(this.curst <= 35)
+            else if(this.curst <= 30)
             {
-               this.basmplbonus = this.pluss(0,this.logof(this.curst,1000) * (2.7 - this.curst / 50) - 2 / 3);
+               this.basmplbonus = this.pluss(0,this.logof(this.curst,1000) * (2.7 - (this.curst - 20) / 50) - 2 / 3);
             }
             else if(this.curst <= 55)
             {
-               this.basmplbonus = this.pluss(0,this.logof(this.curst,1000) * (2.4 - this.curst / 100) - 2 / 3);
+               this.basmplbonus = this.pluss(0,this.logof(this.curst,1000) * (2.5 - (this.curst - 30) / 100) - 2 / 3);
+            }
+            else if(this.curst <= 70)
+            {
+               this.basmplbonus = this.pluss(0,this.logof(this.curst,1000) * (2.25 - (this.curst - 55) / 150) - 2 / 3);
+            }
+            else if(this.curst <= 80)
+            {
+               this.basmplbonus = this.pluss(0,this.logof(this.curst,1000) * (2.15 - (this.curst - 70) * 0.006) - 2 / 3);
             }
             else if(this.curst <= 90)
             {
-               this.basmplbonus = this.pluss(0,this.logof(this.curst,1000) * (2.2 - this.curst / 200) - 2 / 3);
+               this.basmplbonus = this.pluss(0,this.logof(this.curst,1000) * (2.09 - (this.curst - 80) * 0.005) - 2 / 3);
             }
             else if(this.curst <= 100)
             {
-               this.basmplbonus = this.pluss(0,this.logof(this.curst,1000) * (2.025 - this.curst / 400) - 2 / 3);
+               this.basmplbonus = this.pluss(0,this.logof(this.curst,1000) * (2.04 - (this.curst - 90) * 0.004) - 2 / 3);
             }
             else
             {
@@ -5518,14 +5526,30 @@ package RI2_fla
                if(this.hps[0] < this.logof(0.5,1000))
                {
                   this.curst = this.curst + 1;
-                  this.hps[1] = this.hps[1] + (this.logof(1.25 + 0.02 * this.curst,1000) - this.logof(this.curst - 1,1000) * 2 + this.logof(this.curst,1000) * 2);
+                  this.hps[1] = this.hps[1] + (this.logof(this.biger(1,1.25 - 0.005 * this.curst),1000) - this.logof(this.curst - 1,1000) * 2 + this.logof(this.curst,1000) * 2);
+                  if(this.curst >= 100 && this.curst % 10 == 0)
+                  {
+                     this.hps[1] = this.hps[1] + this.logof(2,1000);
+                  }
+                  if(this.curst >= 200 && this.curst % 100 == 0)
+                  {
+                     this.hps[1] = this.hps[1] + this.logof(5,1000);
+                  }
                   this.hps[0] = this.hps[1];
                }
             }
             else if(this.hps[0] == this.atcir[a] + this.logof(b,1000))
             {
                this.curst = this.curst + 1;
-               this.hps[1] = this.hps[1] + (this.logof(1.25 + 0.02 * this.curst,1000) - this.logof(this.curst - 1,1000) * 2 + this.logof(this.curst,1000) * 2);
+               this.hps[1] = this.hps[1] + (this.logof(this.biger(1,1.25 - 0.005 * this.curst),1000) - this.logof(this.curst - 1,1000) * 2 + this.logof(this.curst,1000) * 2);
+               if(this.curst >= 100 && this.curst % 10 == 0)
+               {
+                  this.hps[1] = this.hps[1] + this.logof(2,1000);
+               }
+               if(this.curst >= 200 && this.curst % 100 == 0)
+               {
+                  this.hps[1] = this.hps[1] + this.logof(5,1000);
+               }
                this.hps[0] = this.hps[1];
             }
             else if(this.hps[0] < this.atcir[a] + this.logof(b,1000))
@@ -5533,7 +5557,15 @@ package RI2_fla
                estdmg = 0;
                estdmg = this.minuss(this.atcir[a] + this.logof(b,1000),this.hps[0]);
                this.curst = this.curst + 1;
-               this.hps[1] = this.hps[1] + (this.logof(1.25 + 0.02 * this.curst,1000) - this.logof(this.curst - 1,1000) * 2 + this.logof(this.curst,1000) * 2);
+               this.hps[1] = this.hps[1] + (this.logof(this.biger(1,1.25 - 0.005 * this.curst),1000) - this.logof(this.curst - 1,1000) * 2 + this.logof(this.curst,1000) * 2);
+               if(this.curst >= 100 && this.curst % 10 == 0)
+               {
+                  this.hps[1] = this.hps[1] + this.logof(2,1000);
+               }
+               if(this.curst >= 200 && this.curst % 100 == 0)
+               {
+                  this.hps[1] = this.hps[1] + this.logof(5,1000);
+               }
                this.hps[0] = this.hps[1];
                this.dealdamnum(estdmg);
             }
@@ -5549,14 +5581,30 @@ package RI2_fla
             if(this.hps[0] < this.logof(0.5,1000))
             {
                this.curst = this.curst + 1;
-               this.hps[1] = this.hps[1] + (this.logof(1.25 + 0.02 * this.curst,1000) - this.logof(this.curst - 1,1000) * 2 + this.logof(this.curst,1000) * 2);
+               this.hps[1] = this.hps[1] + (this.logof(this.biger(1,1.25 - 0.005 * this.curst),1000) - this.logof(this.curst - 1,1000) * 2 + this.logof(this.curst,1000) * 2);
+               if(this.curst >= 100 && this.curst % 10 == 0)
+               {
+                  this.hps[1] = this.hps[1] + this.logof(2,1000);
+               }
+               if(this.curst >= 200 && this.curst % 100 == 0)
+               {
+                  this.hps[1] = this.hps[1] + this.logof(5,1000);
+               }
                this.hps[0] = this.hps[1];
             }
          }
          else if(this.hps[0] == est)
          {
             this.curst = this.curst + 1;
-            this.hps[1] = this.hps[1] + (this.logof(1.25 + 0.02 * this.curst,1000) - this.logof(this.curst - 1,1000) * 2 + this.logof(this.curst,1000) * 2);
+            this.hps[1] = this.hps[1] + (this.logof(this.biger(1,1.25 - 0.005 * this.curst),1000) - this.logof(this.curst - 1,1000) * 2 + this.logof(this.curst,1000) * 2);
+            if(this.curst >= 100 && this.curst % 10 == 0)
+            {
+               this.hps[1] = this.hps[1] + this.logof(2,1000);
+            }
+            if(this.curst >= 200 && this.curst % 100 == 0)
+            {
+               this.hps[1] = this.hps[1] + this.logof(5,1000);
+            }
             this.hps[0] = this.hps[1];
          }
          else if(this.hps[0] < est)
@@ -5564,7 +5612,15 @@ package RI2_fla
             estdmg1 = 0;
             estdmg1 = this.minuss(est,this.hps[0]);
             this.curst = this.curst + 1;
-            this.hps[1] = this.hps[1] + (this.logof(1.25 + 0.02 * this.curst,1000) - this.logof(this.curst - 1,1000) * 2 + this.logof(this.curst,1000) * 2);
+            this.hps[1] = this.hps[1] + (this.logof(this.biger(1,1.25 - 0.005 * this.curst),1000) - this.logof(this.curst - 1,1000) * 2 + this.logof(this.curst,1000) * 2);
+            if(this.curst >= 100 && this.curst % 10 == 0)
+            {
+               this.hps[1] = this.hps[1] + this.logof(2,1000);
+            }
+            if(this.curst >= 200 && this.curst % 100 == 0)
+            {
+               this.hps[1] = this.hps[1] + this.logof(5,1000);
+            }
             this.hps[0] = this.hps[1];
             this.dealdamnum(estdmg1);
          }
@@ -5873,7 +5929,7 @@ package RI2_fla
             this.stopall = 1;
             this.atksunl = 0;
             this.curst = 1;
-            this.hps = [1 / 3,1 / 3];
+            this.hps = [2 / 3,2 / 3];
             this.maxmapa = 0;
             this.reb_ = [0,0];
             this.autobuy = [0,0];
@@ -6915,11 +6971,11 @@ package RI2_fla
                {
                   this.v161 = this.mySharedObject.data.v161;
                }
-               if(this.v161 != 2)
+               if(this.v161 != 3)
                {
                   this.curst = 1;
                   this.hps = [2 / 3,2 / 3];
-                  this.v161 = 2;
+                  this.v161 = 3;
                }
                if(this.timing2 - this.timing1 >= 1000000 && this.cheater == 0)
                {
