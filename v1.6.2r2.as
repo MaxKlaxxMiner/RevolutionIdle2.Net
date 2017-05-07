@@ -4441,7 +4441,18 @@ package RI2_fla
          }
          this.npromi[1] = 1 + this.biger(this.prestige[2],this.prused[1]) / 3;
          this.npromi[2] = (this.biger(this.prestige[2],this.prused[2]) - 2) * (1 / 24);
-         this.npromi[3] = Math.round(100 + this.biger(this.prestige[2],this.prused[3]) * 10);
+         if(Math.round(100 + this.biger(this.prestige[2],this.prused[3]) * 10) < 500)
+         {
+            this.npromi[3] = Math.round(100 + this.biger(this.prestige[2],this.prused[3]) * 10);
+         }
+         else if(Math.round(400 + this.biger(this.prestige[2],this.prused[3]) * 2.5) < 1000)
+         {
+            this.npromi[3] = Math.round(400 + this.biger(this.prestige[2],this.prused[3]) * 2.5);
+         }
+         else
+         {
+            this.npromi[3] = Math.round(880 + this.biger(this.prestige[2],this.prused[3]) * 0.5);
+         }
          if(this.prused[0] >= 2)
          {
             if(2 / 3 + (this.prused[0] - 2) * (1 / 16) < 20.6666666666667)
@@ -4463,7 +4474,18 @@ package RI2_fla
          }
          if(this.prused[3] >= 2)
          {
-            this.promi[3] = Math.round(100 + this.prused[3] * 10);
+            if(Math.round(100 + this.prused[3] * 10) < 500)
+            {
+               this.promi[3] = Math.round(100 + this.prused[3] * 10);
+            }
+            else if(Math.round(400 + this.prused[3] * 2.5) < 1000)
+            {
+               this.promi[3] = Math.round(400 + this.prused[3] * 2.5);
+            }
+            else
+            {
+               this.promi[3] = Math.round(880 + this.prused[3] * 0.5);
+            }
          }
          for(this.i = 0; this.i < 4; this.i++)
          {
@@ -4893,7 +4915,7 @@ package RI2_fla
             }
             else
             {
-               this.basmplbonus = this.pluss(0,this.logof(this.curst,1000)) + this.logof(1.1,1000) * this.biger(0,Math.floor(this.curst / 10) - 10) + this.logof(2,1000) * this.biger(0,Math.floor(this.curst / 100) - 1);
+               this.basmplbonus = this.pluss(0,this.logof(this.curst,1000)) + this.logof(1.2,1000) * this.biger(0,Math.floor(this.curst / 10) - 10) + this.logof(5,1000) * this.biger(0,Math.floor(this.curst / 100) - 1) + this.logof(2,1000) * this.biger(0,Math.floor(this.curst / 50) - 2);
             }
             if(this.hps[0] >= 1)
             {
