@@ -4893,7 +4893,7 @@ package RI2_fla
             }
             else
             {
-               this.basmplbonus = this.pluss(0,this.logof(this.curst,1000));
+               this.basmplbonus = this.pluss(0,this.logof(this.curst,1000)) + this.logof(1.1,1000) * this.biger(0,Math.floor(this.curst / 10) - 10) + this.logof(2,1000) * this.biger(0,Math.floor(this.curst / 100) - 1);
             }
             if(this.hps[0] >= 1)
             {
