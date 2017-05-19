@@ -301,6 +301,10 @@ package RI2_fla
       
       public var keynow;
       
+      public var mapareb:Number;
+      
+      public var multomas:Array;
+      
       public function MainTimeline()
       {
          super();
@@ -4557,7 +4561,7 @@ package RI2_fla
       
       public function rebirthation(e:MouseEvent) : *
       {
-         if(this.promi[3] >= Math.round(150 + this.reb_[1] * 10))
+         if(this.promi[3] >= this.mapareb)
          {
             this.rebirth();
          }
@@ -4568,7 +4572,10 @@ package RI2_fla
          if(this.keynow == 17)
          {
             this.reb_[0] = this.reb_[0] + Math.floor(this.promi[3] * (1 / 15) + this.biger(0,this.promi[3] - this.maxmapa) * (2 / 15));
-            this.maxmapa = this.promi[3];
+            if(this.promi[3] > this.maxmapa)
+            {
+               this.maxmapa = this.promi[3];
+            }
             this.reb_[1] = this.reb_[1] + 1;
             this.stopall = 1;
             this.promi = [0,1,0,100];
@@ -4915,7 +4922,7 @@ package RI2_fla
             }
             else
             {
-               this.basmplbonus = this.pluss(0,this.logof(this.curst,1000)) + this.logof(1.2,1000) * this.biger(0,Math.floor(this.curst / 10) - 10) + this.logof(5,1000) * this.biger(0,Math.floor(this.curst / 100) - 1) + this.logof(2,1000) * this.biger(0,Math.floor(this.curst / 50) - 2);
+               this.basmplbonus = this.pluss(0,this.logof(this.curst,1000)) + this.logof(1.2,1000) * this.biger(0,Math.floor(this.curst / 10) - 10) + this.logof(5,1000) * this.biger(0,Math.floor(this.curst / 100) - 1) + this.logof(2,1000) * this.biger(0,Math.floor(this.curst / 50) - 2) + this.logof(1000000,1000) * this.biger(0,Math.floor(this.curst / 1000));
             }
             if(this.hps[0] >= 1)
             {
@@ -5133,11 +5140,23 @@ package RI2_fla
          this.set_super1(this.rebwindowt.atl12,this.rebwindowt.atas12,this.rebwindowt.atlc12,this.rebwindowt.atasc12,11);
          for(this.i = 0; this.i < 12; this.i++)
          {
-            this.atcir[this.i] = this.atkion(this.atklvls1[11 - this.i]) + this.logof(this.atklvls2[11 - this.i] + 2,1000) * (this.upgrades[this.i][2] / this.promi[3] - 1);
+            this.atcir[this.i] = this.atkion(this.atklvls1[11 - this.i],11 - this.i) + this.logof(this.atklvls2[11 - this.i] + 2,1000) * (this.upgrades[this.i][2] / this.promi[3] - 1);
+         }
+         if(this.reb_[1] <= 35)
+         {
+            this.mapareb = Math.round(150 + this.reb_[1] * 10);
+         }
+         else if(this.reb_[1] <= 135)
+         {
+            this.mapareb = Math.round(325 + this.reb_[1] * 5);
+         }
+         else
+         {
+            this.mapareb = Math.round(865 + this.reb_[1]);
          }
          this.rebwindowt.rebpts.text = "Rebirth Points: " + this.reb_[0] + " [+" + Math.floor(this.promi[3] * (1 / 15) + this.biger(0,this.promi[3] - this.maxmapa) * (2 / 15)) + "]";
          this.rebwindowt.rebnum.text = "Rebirth #" + this.reb_[1] + " (x" + Math.round(10 + 5 * this.reb_[1]) / 10 + " speed)";
-         this.rebwindowt.mapaneed.text = "MAPA need to reb.: " + Math.round(150 + this.reb_[1] * 10) + "+";
+         this.rebwindowt.mapaneed.text = "MAPA need to reb.: " + this.mapareb + "+";
          this.rebwindowt.yomapa.text = "Your MAPA now: " + this.promi[3];
          this.rebwindowt.yomax.text = "Your Max MAPA before: " + this.maxmapa;
          if(this.autobuy[0] == 0)
@@ -5475,7 +5494,7 @@ package RI2_fla
       {
          if(this.atklvls1[n] > 0)
          {
-            a.text = "- Atk/Lap: " + this.atkio(this.atklvls1[n]) + " (" + this.atkio2(this.ambs[0][n] + 1) + ")";
+            a.text = "- Atk/Lap: " + this.atkio(this.atklvls1[n],n) + " (" + this.atkio2(this.ambs[0][n] + 1,n) + ")";
          }
          else
          {
@@ -5493,31 +5512,31 @@ package RI2_fla
          d.text = "Cost: " + this.biger(this.sumpr(this.atkcosts2[n],this.ambs[1][n]),this.atkcosts2[n]) + " RP";
       }
       
-      public function atkio(a:Number) : *
+      public function atkio(a:Number, b:Number) : *
       {
          if(a == 0)
          {
             return "NO";
          }
-         return "" + this.short(this.logof(2,1000) * (a - 1));
+         return "" + this.short(this.logof(this.multomas[b],1000) * (a - 1));
       }
       
-      public function atkion(a:Number) : *
+      public function atkion(a:Number, b:Number) : *
       {
          if(a == 0)
          {
             return -1;
          }
-         return this.logof(2,1000) * (a - 1);
+         return this.logof(this.multomas[b],1000) * (a - 1);
       }
       
-      public function atkio2(a:Number) : *
+      public function atkio2(a:Number, b:Number) : *
       {
          if(a == 0)
          {
             return "x1";
          }
-         return "x" + this.short(this.logof(2,1000) * (a - 1));
+         return "x" + this.short(this.logof(this.multomas[b],1000) * (a - 1));
       }
       
       public function findmaxAPN(a:Number, b:Number) : *
@@ -5680,84 +5699,84 @@ package RI2_fla
             {
                this.he.visible = true;
                this.he.x = 284.9;
-               this.he.y = 54.55;
+               this.he.y = 56.55;
                this.setforx(0);
             }
             else if(this.overg.b2.hitTestPoint(mouseX,mouseY) && this.upgrades[0][0] > 0)
             {
                this.he.visible = true;
                this.he.x = 284.9;
-               this.he.y = 114.35;
+               this.he.y = 116.35;
                this.setforx(1);
             }
             else if(this.overg.b3.hitTestPoint(mouseX,mouseY) && this.upgrades[1][0] > 0)
             {
                this.he.visible = true;
                this.he.x = 284.9;
-               this.he.y = 174.15;
+               this.he.y = 176.15;
                this.setforx(2);
             }
             else if(this.overg.b4.hitTestPoint(mouseX,mouseY) && this.upgrades[2][0] > 0)
             {
                this.he.visible = true;
                this.he.x = 284.9;
-               this.he.y = 233.95;
+               this.he.y = 235.95;
                this.setforx(3);
             }
             else if(this.overg.b5.hitTestPoint(mouseX,mouseY) && this.upgrades[3][0] > 0)
             {
                this.he.visible = true;
                this.he.x = 284.9;
-               this.he.y = 293.75;
+               this.he.y = 295.75;
                this.setforx(4);
             }
             else if(this.overg.b6.hitTestPoint(mouseX,mouseY) && this.upgrades[4][0] > 0)
             {
                this.he.visible = true;
                this.he.x = 284.9;
-               this.he.y = 353.55;
+               this.he.y = 355.55;
                this.setforx(5);
             }
             else if(this.overg.b7.hitTestPoint(mouseX,mouseY) && this.upgrades[5][0] > 0)
             {
                this.he.visible = true;
                this.he.x = 284.9;
-               this.he.y = 413.35;
+               this.he.y = 415.35;
                this.setforx(6);
             }
             else if(this.overg.b8.hitTestPoint(mouseX,mouseY) && this.upgrades[6][0] > 0)
             {
                this.he.visible = true;
                this.he.x = 284.9;
-               this.he.y = 473.15;
+               this.he.y = 475.15;
                this.setforx(7);
             }
             else if(this.overg.b9.hitTestPoint(mouseX,mouseY) && this.upgrades[7][0] > 0)
             {
                this.he.visible = true;
                this.he.x = 284.9;
-               this.he.y = 532.95;
+               this.he.y = 534.95;
                this.setforx(8);
             }
             else if(this.overg.b10.hitTestPoint(mouseX,mouseY) && this.upgrades[8][0] > 0)
             {
                this.he.visible = true;
                this.he.x = 284.9;
-               this.he.y = 592.75;
+               this.he.y = 594.75;
                this.setforx(9);
             }
             else if(this.overg.b11.hitTestPoint(mouseX,mouseY) && this.upgrades[9][0] > 0)
             {
                this.he.visible = true;
                this.he.x = 284.9;
-               this.he.y = 652.55;
+               this.he.y = 654.55;
                this.setforx(10);
             }
             else if(this.overg.b12.hitTestPoint(mouseX,mouseY) && this.upgrades[10][0] > 0)
             {
                this.he.visible = true;
                this.he.x = 284.9;
-               this.he.y = 712.35;
+               this.he.y = 714.35;
                this.setforx(11);
             }
             else
@@ -7273,6 +7292,7 @@ package RI2_fla
          this.rebwindowt.others.is_aas.addEventListener(MouseEvent.CLICK,this.actAAS);
          this.rebwindowt.whites.b_batl.addEventListener(MouseEvent.CLICK,this.buybat);
          this.rebwindowt.others.clos.addEventListener(MouseEvent.CLICK,this.closrb);
+         this.multomas = [Math.sqrt(10),3,2.9,2.8,2.7,2.6,2.5,2.4,2.3,2.2,2.1,2];
          stage.addEventListener(Event.ENTER_FRAME,this.otherss);
          this.optwindowt.optdes.fullres.addEventListener(MouseEvent.MOUSE_UP,this.goodbye);
          if(!this.newopti)
