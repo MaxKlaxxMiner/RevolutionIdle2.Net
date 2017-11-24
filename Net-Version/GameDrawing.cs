@@ -78,6 +78,8 @@ namespace RevolutionIdle2
       return g;
     }
 
+    // drawing filled arcs: http://www.programering.com/q/MTN5MDMwATQ.html
+
     /// <summary>
     /// Aktualisiert und Zeichnet das Spielfeld
     /// </summary>
